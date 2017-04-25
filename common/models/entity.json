@@ -1,0 +1,47 @@
+{
+  "name": "Entity",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "nationalTaxRegistry": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "type": {
+      "type": "number",
+      "required": true,
+      "default": 1
+    }
+  },
+  "validations": [],
+  "relations": {
+    "accounts": {
+      "type": "hasMany",
+      "model": "Account",
+      "foreignKey": ""
+    },
+    "projects": {
+      "type": "hasMany",
+      "model": "Project",
+      "foreignKey": "",
+      "through": "EntityHasProjects"
+    },
+    "costSheets": {
+      "type": "hasMany",
+      "model": "CostSheet",
+      "foreignKey": "",
+      "through": "EntityHasCostSheets"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
