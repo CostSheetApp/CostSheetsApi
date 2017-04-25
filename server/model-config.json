@@ -14,25 +14,54 @@
     ]
   },
   "User": {
-    "dataSource": "db"
+    "dataSource": "MySql",
+    "public": false
   },
   "AccessToken": {
-    "dataSource": "db",
+    "dataSource": "MySql",
     "public": false
   },
   "ACL": {
-    "dataSource": "db",
+    "dataSource": "MySql",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "db",
+    "dataSource": "MySql",
     "public": false,
     "options": {
       "strictObjectIDCoercion": true
     }
   },
   "Role": {
-    "dataSource": "db",
+    "dataSource": "MySql",
     "public": false
+  },
+  "Account": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "Entity": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "Project": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "CostSheet": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "EntityHasProjects": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "EntityHasCostSheets": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "ProjectHasCostSheets": {
+    "dataSource": "MySql",
+    "public": true
   }
 }

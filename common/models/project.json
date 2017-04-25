@@ -1,0 +1,47 @@
+{
+  "name": "Project",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "startDate": {
+      "type": "date",
+      "required": true
+    },
+    "budget": {
+      "type": "number",
+      "required": true
+    },
+    "cost": {
+      "type": "number",
+      "required": true
+    },
+    "profitPercentage": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "costSheets": {
+      "type": "hasMany",
+      "model": "CostSheet",
+      "foreignKey": "",
+      "through": "ProjectHasCostSheets"
+    },
+    "entities": {
+      "type": "hasMany",
+      "model": "Entity",
+      "foreignKey": "",
+      "through": "EntityHasProjects"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
