@@ -1,0 +1,24 @@
+{
+  "name": "EntityHasCostSheets",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "entity": {
+      "type": "belongsTo",
+      "model": "Entity",
+      "foreignKey": ""
+    },
+    "costSheet": {
+      "type": "belongsTo",
+      "model": "CostSheet",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,47 @@
+{
+  "name": "CostSheet",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "minimumUnit": {
+      "type": "number",
+      "required": true
+    },
+    "totalUnit": {
+      "type": "number",
+      "required": true
+    },
+    "minimumCost": {
+      "type": "number",
+      "required": true
+    },
+    "totalCost": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "entities": {
+      "type": "hasMany",
+      "model": "Entity",
+      "foreignKey": "",
+      "through": "EntityHasCostSheets"
+    },
+    "projects": {
+      "type": "hasMany",
+      "model": "Project",
+      "foreignKey": "",
+      "through": "ProjectHasCostSheets"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
