@@ -38,7 +38,10 @@
   },
   "Account": {
     "dataSource": "MySql",
-    "public": true
+    "public": true,
+    "options": {
+      "emailVerificationRequired": true
+    }
   },
   "Entity": {
     "dataSource": "MySql",
@@ -63,5 +66,8 @@
   "ProjectHasCostSheets": {
     "dataSource": "MySql",
     "public": true
+  },
+  "Email": {
+    "dataSource": "Mail"
   }
 }
