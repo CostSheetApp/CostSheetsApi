@@ -1,0 +1,43 @@
+{
+  "name": "Material",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "code": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "waste": {
+      "type": "number",
+      "required": true,
+      "default": 1
+    }
+  },
+  "validations": [],
+  "relations": {
+    "entity": {
+      "type": "belongsTo",
+      "model": "Entity",
+      "foreignKey": ""
+    },
+    "unitsOfMeasurements": {
+      "type": "hasOne",
+      "model": "UnitsOfMeasurement",
+      "foreignKey": ""
+    },
+    "materialCostHistories": {
+      "type": "hasMany",
+      "model": "MaterialCostHistory",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

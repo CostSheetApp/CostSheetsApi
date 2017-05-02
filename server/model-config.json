@@ -38,7 +38,10 @@
   },
   "Account": {
     "dataSource": "MySql",
-    "public": true
+    "public": true,
+    "options": {
+      "emailVerificationRequired": true
+    }
   },
   "Entity": {
     "dataSource": "MySql",
@@ -61,6 +64,25 @@
     "public": true
   },
   "ProjectHasCostSheets": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "Email": {
+    "dataSource": "Mail"
+  },
+  "Region": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "Material": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "UnitsOfMeasurement": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "MaterialCostHistory": {
     "dataSource": "MySql",
     "public": true
   }

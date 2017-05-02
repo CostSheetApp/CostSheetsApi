@@ -12,5 +12,21 @@
     "name": "MySql",
     "user": "afernandez",
     "connector": "mysql"
+  },
+  "Mail": {
+    "name": "Mail",
+    "connector": "mail",
+    "transports": [
+      {
+        "type": "SMTP",
+        "host": "smtp.gmail.com",
+        "secure": true,
+        "port": 465,
+        "auth": {
+          "user": "costsheets.unitec@gmail.com",
+          "pass": "cs123456"
+        }
+      }
+    ]
   }
 }
