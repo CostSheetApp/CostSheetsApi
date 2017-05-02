@@ -1,0 +1,39 @@
+{
+  "name": "Region",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "entity": {
+      "type": "belongsTo",
+      "model": "Entity",
+      "foreignKey": ""
+    },
+    "materialCostHistories": {
+      "type": "hasMany",
+      "model": "MaterialCostHistory",
+      "foreignKey": ""
+    },
+    "projectHasCostSheets": {
+      "type": "hasMany",
+      "model": "ProjectHasCostSheets",
+      "foreignKey": ""
+    },
+    "costSheets": {
+      "type": "hasMany",
+      "model": "CostSheet",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
