@@ -29,6 +29,9 @@
       "foreignKey": ""
     }
   },
+  "mixins": {
+    "TimeStamp" : true
+  },
   "acls": [],
   "methods": {}
 }
