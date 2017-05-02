@@ -27,6 +27,9 @@
       "required": true
     }
   },
+  "mixins": {
+    "TimeStamp" : true
+  },
   "validations": [],
   "relations": {
     "costSheets": {

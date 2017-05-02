@@ -1,9 +1,9 @@
 var path = require('path');
 var app = require(path.resolve (__dirname, './server'));
-//var models = app.models;
+var models = app.models;
 var ds = app.dataSources.MySql;
 //console.log(models)
-var models = ['Account', 'AccessToken', 'ACL', 'RoleMapping', 'Role','Entity','Project','CostSheet','EntityHasProjects','EntityHasCostSheets','ProjectHasCostSheets'];
+//var models = ['Account', 'AccessToken', 'ACL', 'RoleMapping', 'Role','Entity','Project','CostSheet','EntityHasProjects','EntityHasCostSheets','ProjectHasCostSheets'];
 
 
 var migrate = true;

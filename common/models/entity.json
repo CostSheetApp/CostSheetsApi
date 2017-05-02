@@ -22,6 +22,9 @@
       "default": 1
     }
   },
+  "mixins": {
+    "TimeStamp" : true
+  },
   "validations": [],
   "relations": {
     "accounts": {

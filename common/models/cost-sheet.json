@@ -17,6 +17,9 @@
       "default": 0
     }
   },
+  "mixins": {
+    "TimeStamp" : true
+  },
   "validations": [],
   "relations": {
     "entities": {
