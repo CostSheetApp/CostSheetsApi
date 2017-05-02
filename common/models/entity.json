@@ -40,6 +40,16 @@
       "model": "CostSheet",
       "foreignKey": "",
       "through": "EntityHasCostSheets"
+    },
+    "materials": {
+      "type": "hasMany",
+      "model": "Material",
+      "foreignKey": ""
+    },
+    "regions": {
+      "type": "hasMany",
+      "model": "Region",
+      "foreignKey": ""
     }
   },
   "acls": [],

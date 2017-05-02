@@ -1,0 +1,33 @@
+{
+  "name": "UnitsOfMeasurement",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "abbreviation": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": "number",
+      "required": true,
+      "default": 1
+    }
+  },
+  "validations": [],
+  "relations": {
+    "materials": {
+      "type": "hasMany",
+      "model": "Material",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

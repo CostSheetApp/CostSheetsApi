@@ -1,17 +1,16 @@
 {
-  "name": "ProjectHasCostSheets",
+  "name": "MaterialCostHistory",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "totalUnit": {
-      "type": "number",
-      "required": true,
-      "default": 0
+    "createdAt": {
+      "type": "date",
+      "required": true
     },
-    "totalCost": {
+    "cost": {
       "type": "number",
       "required": true,
       "default": 0
@@ -19,14 +18,9 @@
   },
   "validations": [],
   "relations": {
-    "project": {
+    "material": {
       "type": "belongsTo",
-      "model": "Project",
-      "foreignKey": ""
-    },
-    "costSheet": {
-      "type": "belongsTo",
-      "model": "CostSheet",
+      "model": "Material",
       "foreignKey": ""
     },
     "region": {
