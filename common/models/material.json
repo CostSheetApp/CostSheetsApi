@@ -7,9 +7,17 @@
   },
   "properties": {
     "code": {
-      "type": "string",
-      "required": true
-    },
+      "type": "number",
+      "required": true,
+      "length":10,
+      "mysql":
+      {
+          "dataType":"INT",
+          "dataLength":10,
+          "nullable":"N"
+      }
+    }
+    ,
     "description": {
       "type": "string",
       "required": true
@@ -30,8 +38,8 @@
       "model": "Entity",
       "foreignKey": ""
     },
-    "unitsOfMeasurements": {
-      "type": "hasOne",
+    "unitsOfMeasurement": {
+      "type": "belongsTo",
       "model": "UnitsOfMeasurement",
       "foreignKey": ""
     },
