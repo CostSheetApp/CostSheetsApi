@@ -3,34 +3,31 @@
 module.exports = function(Material) {
     var app = require('../../server/server');
     Material.observe('before save', function updateTimestamp(ctx, next) {
+        var code = 1;
+        var id = 0;
         if(ctx.isNewInstance){
-            ctx.instance.code = 1;
+            if(ctx.instance){
+                id = ctx.instance.entityId;
+            }else{
+                id = ctx.data.entityId;
+            }
+            Material.find({where: { entityId: id },order: 'code DESC', limit: 1,fields: {code: true}}, function(err,materials){
+                if(err){
+                    return next(err);
+                }
 
-            const User = app.models.Account;    // works!
-            const token = ctx.options && ctx.options.accessToken;
-            const userId = token && token.userId;
-
-            User.findById(userId,function(err,user){
-                console.log("user",user);
-                Material.find({where: {entityId: 1},order: 'code DESC', limit: 1,fields: {code: true}}, function(err,materials){
-                    console.log(materials);
-                    if(materials.length){
-                        if(ctx.instance){
-                            ctx.instance.entityId = user.entityId;
-                            ctx.instance.code = materials[0].code + 1;
-                        }else{
-                            ctx.data.entityId = user.entityId;
-                            ctx.data.code = materials[0].code + 1;
-                        }
-                    }
-                    next();
-                });    
-            });
-            
-            
-
+                if(materials.length){
+                    code = materials[0].code + 1;
+                }
+                if(ctx.instance){
+                    ctx.instance.code = code;
+                }else{
+                    ctx.data.code = code;
+                }
+                return next();
+            }); 
         }else{
             next();
-        }
+        }        
     });
 };

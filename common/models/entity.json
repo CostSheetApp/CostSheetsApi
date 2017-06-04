@@ -15,11 +15,6 @@
     },
     "address": {
       "type": "string"
-    },
-    "type": {
-      "type": "number",
-      "required": true,
-      "default": 1
     }
   },
   "mixins": {
