@@ -5,8 +5,6 @@ var path = require('path');
 module.exports = function(Account) {
     //send verification email after registration
   Account.afterRemote('create', function(context, account, next) {
-    console.log('> account.afterRemote triggered');
-    console.log(context);
     var url = 'http://localhost:3001/login';
     var options = {
       type: 'email',
