@@ -32,7 +32,7 @@ module.exports = function(Entity) {
                     Entity.deleteById(entity.id);
                     return next(err);
                 }
-                return next();
             });
+        next();
     });
 };
