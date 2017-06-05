@@ -1,0 +1,40 @@
+{
+  "name": "Manpower",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "code": {
+      "type": "number",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true,
+      "default": "manpower description"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "job": {
+      "type": "belongsTo",
+      "model": "Job",
+      "foreignKey": ""
+    },
+    "costSheets": {
+      "type": "hasMany",
+      "model": "CostSheet",
+      "foreignKey": "",
+      "through": "CostSheetHasManpower"
+    },
+    "manpowerCostHistories": {
+      "type": "hasMany",
+      "model": "ManpowerCostHistory",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
