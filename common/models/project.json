@@ -5,6 +5,9 @@
   "options": {
     "validateUpsert": true
   },
+  "mixins": {
+    "TimeStamp": true
+  },
   "properties": {
     "name": {
       "type": "string",
@@ -16,19 +19,19 @@
     },
     "budget": {
       "type": "number",
-      "required": true
+      "required": true,
+      "default": 0
     },
     "cost": {
       "type": "number",
-      "required": true
+      "required": true,
+      "default": 0
     },
     "profitPercentage": {
       "type": "number",
-      "required": true
+      "required": true,
+      "default": 0
     }
-  },
-  "mixins": {
-    "TimeStamp" : true
   },
   "validations": [],
   "relations": {

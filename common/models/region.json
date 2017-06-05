@@ -5,14 +5,14 @@
   "options": {
     "validateUpsert": true
   },
+  "mixins": {
+    "TimeStamp": true
+  },
   "properties": {
     "name": {
       "type": "string",
       "required": true
     }
-  },
-  "mixins": {
-    "TimeStamp" : true
   },
   "validations": [],
   "relations": {
@@ -34,6 +34,11 @@
     "costSheets": {
       "type": "hasMany",
       "model": "CostSheet",
+      "foreignKey": ""
+    },
+    "manpowerCostHistories": {
+      "type": "hasMany",
+      "model": "ManpowerCostHistory",
       "foreignKey": ""
     }
   },
