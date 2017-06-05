@@ -1,0 +1,29 @@
+{
+  "name": "Job",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "code": {
+      "type": "number",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true,
+      "default": "job description"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "manpowers": {
+      "type": "hasMany",
+      "model": "Manpower",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
