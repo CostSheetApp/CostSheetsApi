@@ -9,7 +9,7 @@
     "mixins": [
       "loopback/common/mixins",
       "loopback/server/mixins",
-       "../node_modules/loopback-ds-timestamp-mixin",
+      "../node_modules/loopback-ds-timestamp-mixin",
       "../common/mixins",
       "./mixins"
     ]
@@ -84,6 +84,38 @@
     "public": true
   },
   "MaterialCostHistory": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "CostSheetHasMaterials": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "CostSheetHasManpower": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "CostSheetHasToolsAndEquipment": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "Job": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "Manpower": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "ManpowerCostHistory": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "ToolsAndEquipment": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "ToolsAndEquipmentCostHistory": {
     "dataSource": "MySql",
     "public": true
   }
