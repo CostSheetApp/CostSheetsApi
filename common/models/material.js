@@ -11,13 +11,13 @@ module.exports = function(Material) {
             }else{
                 id = ctx.data.entityId;
             }
-            Material.find({where: { entityId: id },order: 'code DESC', limit: 1,fields: {code: true}}, function(err,materials){
+            Material.find({where: { entityId: id },order: 'code DESC', limit: 1,fields: {code: true}}, function(err,items){
                 if(err){
                     return next(err);
                 }
 
-                if(materials.length){
-                    code = materials[0].code + 1;
+                if(items.length){
+                    code = items[0].code + 1;
                 }
                 if(ctx.instance){
                     ctx.instance.code = code;
