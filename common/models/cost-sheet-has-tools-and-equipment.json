@@ -1,0 +1,19 @@
+{
+  "name": "CostSheetHasToolsAndEquipment",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "performance": {
+      "type": "number",
+      "required": true,
+      "default": 100
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
