@@ -5,6 +5,9 @@
   "options": {
     "validateUpsert": true
   },
+  "mixins": {
+    "TimeStamp": true
+  },
   "properties": {
     "minimumUnit": {
       "type": "number",
@@ -15,10 +18,12 @@
       "type": "number",
       "required": true,
       "default": 0
+    },
+    "description": {
+      "type": "string",
+      "required": true,
+      "default": "new cost sheet description"
     }
-  },
-  "mixins": {
-    "TimeStamp" : true
   },
   "validations": [],
   "relations": {
@@ -43,6 +48,24 @@
       "type": "belongsTo",
       "model": "UnitsOfMeasurement",
       "foreignKey": ""
+    },
+    "materials": {
+      "type": "hasMany",
+      "model": "Material",
+      "foreignKey": "",
+      "through": "CostSheetHasMaterial"
+    },
+    "manpowers": {
+      "type": "hasMany",
+      "model": "Manpower",
+      "foreignKey": "",
+      "through": "CostSheetHasManpower"
+    },
+    "toolsAndEquipments": {
+      "type": "hasMany",
+      "model": "ToolsAndEquipment",
+      "foreignKey": "",
+      "through": "CostSheetHasToolsAndEquipment"
     }
   },
   "acls": [],

@@ -1,0 +1,35 @@
+{
+  "name": "ToolsAndEquipment",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "code": {
+      "type": "number",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true,
+      "default": "new tool/equipment"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "costSheets": {
+      "type": "hasMany",
+      "model": "CostSheet",
+      "foreignKey": "",
+      "through": "CostSheetHasToolsAndEquipment"
+    },
+    "toolsAndEquipmentCostHistories": {
+      "type": "hasMany",
+      "model": "ToolsAndEquipmentCostHistory",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

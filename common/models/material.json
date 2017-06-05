@@ -5,19 +5,20 @@
   "options": {
     "validateUpsert": true
   },
+  "mixins": {
+    "TimeStamp": true
+  },
   "properties": {
     "code": {
       "type": "number",
       "required": true,
-      "length":10,
-      "mysql":
-      {
-          "dataType":"INT",
-          "dataLength":10,
-          "nullable":"N"
+      "length": 10,
+      "mysql": {
+        "dataType": "INT",
+        "dataLength": 10,
+        "nullable": "N"
       }
-    }
-    ,
+    },
     "description": {
       "type": "string",
       "required": true
@@ -27,9 +28,6 @@
       "required": true,
       "default": 1
     }
-  },
-  "mixins": {
-    "TimeStamp" : true
   },
   "validations": [],
   "relations": {
@@ -47,6 +45,12 @@
       "type": "hasMany",
       "model": "MaterialCostHistory",
       "foreignKey": ""
+    },
+    "costSheets": {
+      "type": "hasMany",
+      "model": "CostSheet",
+      "foreignKey": "",
+      "through": "CostSheetHasMaterials"
     }
   },
   "acls": [],

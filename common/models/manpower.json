@@ -1,40 +1,33 @@
 {
-  "name": "Region",
+  "name": "Manpower",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
-  "mixins": {
-    "TimeStamp": true
-  },
   "properties": {
-    "name": {
-      "type": "string",
+    "code": {
+      "type": "number",
       "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true,
+      "default": "manpower description"
     }
   },
   "validations": [],
   "relations": {
-    "entity": {
+    "job": {
       "type": "belongsTo",
-      "model": "Entity",
-      "foreignKey": ""
-    },
-    "materialCostHistories": {
-      "type": "hasMany",
-      "model": "MaterialCostHistory",
-      "foreignKey": ""
-    },
-    "projectHasCostSheets": {
-      "type": "hasMany",
-      "model": "ProjectHasCostSheets",
+      "model": "Job",
       "foreignKey": ""
     },
     "costSheets": {
       "type": "hasMany",
       "model": "CostSheet",
-      "foreignKey": ""
+      "foreignKey": "",
+      "through": "CostSheetHasManpower"
     },
     "manpowerCostHistories": {
       "type": "hasMany",

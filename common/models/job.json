@@ -1,29 +1,26 @@
 {
-  "name": "Account",
-  "base": "User",
+  "name": "Job",
+  "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
-  "mixins": {
-    "TimeStamp": true
-  },
   "properties": {
-    "name": {
-      "type": "string",
+    "code": {
+      "type": "number",
       "required": true
     },
-    "isEnabled": {
-      "type": "boolean",
+    "description": {
+      "type": "string",
       "required": true,
-      "default": true
+      "default": "job description"
     }
   },
   "validations": [],
   "relations": {
-    "entity": {
-      "type": "belongsTo",
-      "model": "Entity",
+    "manpowers": {
+      "type": "hasMany",
+      "model": "Manpower",
       "foreignKey": ""
     }
   },

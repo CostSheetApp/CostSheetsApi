@@ -5,6 +5,9 @@
   "options": {
     "validateUpsert": true
   },
+  "mixins": {
+    "TimeStamp": true
+  },
   "properties": {
     "createdAt": {
       "type": "date",
@@ -28,9 +31,6 @@
       "model": "Region",
       "foreignKey": ""
     }
-  },
-  "mixins": {
-    "TimeStamp" : true
   },
   "acls": [],
   "methods": {}

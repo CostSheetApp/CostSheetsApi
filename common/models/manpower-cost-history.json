@@ -1,6 +1,6 @@
 {
-  "name": "Account",
-  "base": "User",
+  "name": "ManpowerCostHistory",
+  "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
@@ -9,21 +9,26 @@
     "TimeStamp": true
   },
   "properties": {
-    "name": {
-      "type": "string",
+    "createdAt": {
+      "type": "date",
       "required": true
     },
-    "isEnabled": {
-      "type": "boolean",
+    "cost": {
+      "type": "number",
       "required": true,
-      "default": true
+      "default": 0
     }
   },
   "validations": [],
   "relations": {
-    "entity": {
+    "material": {
       "type": "belongsTo",
-      "model": "Entity",
+      "model": "Manpower",
+      "foreignKey": ""
+    },
+    "region": {
+      "type": "belongsTo",
+      "model": "Region",
       "foreignKey": ""
     }
   },
