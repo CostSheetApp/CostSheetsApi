@@ -48,6 +48,16 @@
       "type": "hasMany",
       "model": "Region",
       "foreignKey": ""
+    },
+    "manpowers": {
+      "type": "hasMany",
+      "model": "Manpower",
+      "foreignKey": ""
+    },
+    "toolsAndEquipments": {
+      "type": "hasMany",
+      "model": "ToolsAndEquipment",
+      "foreignKey": ""
     }
   },
   "acls": [],
