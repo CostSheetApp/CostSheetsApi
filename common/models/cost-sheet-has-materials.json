@@ -1,0 +1,24 @@
+{
+  "name": "CostSheetHasMaterials",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "waste": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "performance": {
+      "type": "number",
+      "required": true,
+      "default": 100
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
