@@ -28,6 +28,11 @@
       "type": "hasMany",
       "model": "ToolsAndEquipmentCostHistory",
       "foreignKey": ""
+    },
+    "entity": {
+      "type": "belongsTo",
+      "model": "Entity",
+      "foreignKey": ""
     }
   },
   "acls": [],

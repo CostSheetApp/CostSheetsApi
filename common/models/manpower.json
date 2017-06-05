@@ -33,6 +33,11 @@
       "type": "hasMany",
       "model": "ManpowerCostHistory",
       "foreignKey": ""
+    },
+    "entity": {
+      "type": "belongsTo",
+      "model": "Entity",
+      "foreignKey": ""
     }
   },
   "acls": [],
