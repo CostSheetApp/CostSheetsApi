@@ -1,0 +1,37 @@
+{
+  "name": "ManpowerCostHistory",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "mixins": {
+    "TimeStamp": true
+  },
+  "properties": {
+    "createdAt": {
+      "type": "date",
+      "required": true
+    },
+    "cost": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    }
+  },
+  "validations": [],
+  "relations": {
+    "material": {
+      "type": "belongsTo",
+      "model": "Manpower",
+      "foreignKey": ""
+    },
+    "region": {
+      "type": "belongsTo",
+      "model": "Region",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
