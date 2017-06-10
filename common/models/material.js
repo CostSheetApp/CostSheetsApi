@@ -30,4 +30,15 @@ module.exports = function(Material) {
             next();
         }        
     });
+
+    Material.afterRemote('create', function(ctx, material, next) {
+        if(!(material.cost && material.cost>0) && !(material.regionId && material.regionId>0)) next();
+
+        material.materialCostHistories.create({cost: material.cost, regionId: material.regionId},function(err,result){
+            if(err){
+                next(err);
+            }
+                next();
+        });
+    });
 };
