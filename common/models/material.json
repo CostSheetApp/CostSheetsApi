@@ -27,6 +27,11 @@
       "type": "number",
       "required": true,
       "default": 1
+    },
+    "isDeleted": {
+      "type": "boolean",
+      "required": true,
+      "default": false
     }
   },
   "validations": [],
