@@ -8,6 +8,9 @@
   "mixins": {
     "TimeStamp": true
   },
+  "scope": {
+    "order": "createdAt DESC"
+  },
   "properties": {
     "createdAt": {
       "type": "date",
