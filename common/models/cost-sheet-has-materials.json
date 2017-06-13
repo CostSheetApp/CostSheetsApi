@@ -21,11 +21,6 @@
       "scale": 4,
       "required": true,
       "default": 100
-    },
-    "amount": {
-      "type": "number",
-      "required": true,
-      "default": 0
     }
   },
   "validations": [],
