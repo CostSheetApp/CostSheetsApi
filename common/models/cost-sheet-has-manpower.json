@@ -8,12 +8,26 @@
   "properties": {
     "performance": {
       "type": "number",
+      "dataType": "decimal",
+      "precision": 10,
+      "scale": 4,
       "required": true,
       "default": 100
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "costSheet": {
+      "type": "belongsTo",
+      "model": "CostSheet",
+      "foreignKey": ""
+    },
+    "manpower": {
+      "type": "belongsTo",
+      "model": "Manpower",
+      "foreignKey": ""
+    }
+  },
   "acls": [],
   "methods": {}
 }

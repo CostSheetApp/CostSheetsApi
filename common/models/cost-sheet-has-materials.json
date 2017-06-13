@@ -8,17 +8,34 @@
   "properties": {
     "waste": {
       "type": "number",
+      "dataType": "decimal",
+      "precision": 10,
+      "scale": 4,
       "required": true,
       "default": 0
     },
     "performance": {
       "type": "number",
+      "dataType": "decimal",
+      "precision": 10,
+      "scale": 4,
       "required": true,
       "default": 100
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "costSheet": {
+      "type": "belongsTo",
+      "model": "CostSheet",
+      "foreignKey": ""
+    },
+    "material": {
+      "type": "belongsTo",
+      "model": "Material",
+      "foreignKey": ""
+    }
+  },
   "acls": [],
   "methods": {}
 }
