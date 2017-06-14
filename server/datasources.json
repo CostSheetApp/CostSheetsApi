@@ -4,13 +4,13 @@
     "connector": "memory"
   },
   "MySql": {
-    "host": "localhost",
+    "host": "lg7j30weuqckmw07.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "port": 3306,
-    "url": "mysql://afernandez:123456@localhost/CostSheets",
-    "database": "CostSheets",
-    "password": "123456",
-    "name": "MySql",
-    "user": "afernandez",
+    "url": "mysql://le7chlvwdsw189ux:r0g00ebi2xbupr1m@lg7j30weuqckmw07.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/a6fulgaplwy6fgur",
+    "database": "a6fulgaplwy6fgur",
+    "password": "r0g00ebi2xbupr1m",
+    "name": "mysql",
+    "user": "le7chlvwdsw189ux",
     "connector": "mysql"
   },
   "Mail": {
