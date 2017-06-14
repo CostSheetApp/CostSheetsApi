@@ -8,18 +8,18 @@
   "properties": {
     "waste": {
       "type": "number",
+      "required": true,
       "dataType": "decimal",
       "precision": 10,
       "scale": 4,
-      "required": true,
       "default": 0
     },
     "performance": {
       "type": "number",
+      "required": true,
       "dataType": "decimal",
       "precision": 10,
       "scale": 4,
-      "required": true,
       "default": 100
     }
   },
