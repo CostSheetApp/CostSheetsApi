@@ -1,7 +1,7 @@
 {
   "restApiRoot": "/api",
   "host": "127.0.0.1",
-  "port": 3000,
+  "port": process.env.PORT || 5000,
   "remoting": {
     "context": false,
     "rest": {
