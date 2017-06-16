@@ -4,7 +4,13 @@
   },
   "initial": {
     "compression": {},
-    "cors": false,
+    "cors": {
+      "params": {		
+        "origin": false,		
+        "credentials": true,		
+        "maxAge": 86400		
+      }		
+    },
     "helmet#xssFilter": {},
     "helmet#frameguard": {
       "params": [
