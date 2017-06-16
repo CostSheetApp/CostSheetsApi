@@ -4,7 +4,7 @@ var loopback = require('loopback');
 var boot = require('loopback-boot');
 var path = require('path');
 var bodyParser = require('body-parser');
-var cors = require('cors'); //add to allow cors
+//var cors = require('cors'); //add to allow cors
 
 var app = module.exports = loopback();
 
@@ -13,7 +13,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 //add to allow cors
-app.use(cors());
+//app.use(cors());
 
 // configure body parser
 app.use(bodyParser.urlencoded({extended: true}));
