@@ -5,11 +5,11 @@
   "initial": {
     "compression": {},
     "cors": {
-      "params": {
-        "origin": true,
-        "credentials": true,
-        "maxAge": 86400
-      }
+      "params": {		
+        "origin": false,		
+        "credentials": false,		
+        "maxAge": 86400		
+      }		
     },
     "helmet#xssFilter": {},
     "helmet#frameguard": {
