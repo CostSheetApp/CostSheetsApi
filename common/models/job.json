@@ -27,6 +27,11 @@
       "type": "hasMany",
       "model": "Manpower",
       "foreignKey": ""
+    },
+    "entity": {
+      "type": "belongsTo",
+      "model": "Entity",
+      "foreignKey": ""
     }
   },
   "acls": [],

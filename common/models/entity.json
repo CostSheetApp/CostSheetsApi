@@ -58,6 +58,11 @@
       "type": "hasMany",
       "model": "ToolsAndEquipment",
       "foreignKey": ""
+    },
+    "jobs": {
+      "type": "hasMany",
+      "model": "Job",
+      "foreignKey": ""
     }
   },
   "acls": [],
