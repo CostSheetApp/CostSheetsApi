@@ -1,7 +1,8 @@
 'use strict';
 
 module.exports = function(Project) {
-  Project.ConsolidateMaterial = function(projectId, cb) {
+  Project.ConsolidateMaterial = function(id, cb) {
+    console.log(`id ${id}`)
     var response = [];
     var ds = Project.dataSource;
     var sql = 'select name ' +
@@ -38,7 +39,7 @@ module.exports = function(Project) {
                   '      inner join costsheets.unitsofmeasurement as unit ' +
                   '              on unit.id = mate.unitsOfMeasurementId ' +
                   '  where p.isDeleted = 0 ' +
-                  '  and p.id = 1 ' +
+                  '  and p.id = ? ' +
                   '  ) as temp ' +
                   '  group by name ' +
                   '      ,code ' +
@@ -47,7 +48,7 @@ module.exports = function(Project) {
 
     if (ds) {
       if (ds.connector) {
-        ds.connector.execute(sql, projectId, function(err, response) {
+        ds.connector.execute(sql, [id], function(err, response) {
           if (err)
             console.error(err);
           cb(null, response);
@@ -55,6 +56,17 @@ module.exports = function(Project) {
       }
     }
   };
+
+    Project.remoteMethod
+  (
+    'ConsolidateMaterial',
+      {
+        http: {path: '/:id/ConsolidateMaterial', verb: 'get'},
+        description: 'Get list of materials by project',
+        accepts: [{arg: 'id', description: 'Project Id', type: 'number',required: true}],
+        returns: {arg: 'data', type: 'array'},
+      }
+    );
 
   Project.ConsolidateManPower = function(manPowerId, cb) {
     var response = [];
@@ -156,16 +168,7 @@ module.exports = function(Project) {
     }
   };
 
-  Project.remoteMethod
-  (
-    'ConsolidateMaterial',
-      {
-        http: {verb: 'get'},
-        description: 'Get list of materials by project',
-        accepts: {arg: 'projectId', description: 'Id Project', type: 'number', http: {source: 'query'}},
-        returns: {arg: 'data', type: 'Array'},
-      }
-    );
+
 
   Project.remoteMethod
   (
@@ -173,7 +176,7 @@ module.exports = function(Project) {
       {
         http: {verb: 'get'},
         description: 'Get list of man power by project',
-        accepts: {arg: 'manPowerId', description: 'Id Man Power', type: 'number', http: {source: 'query'}},
+        accepts: {arg: 'manPowerId', description: 'Man Power Id', type: 'number', http: {source: 'query'}},
         returns: {arg: 'data', type: 'Array'},
       }
     );
@@ -184,7 +187,7 @@ module.exports = function(Project) {
       {
         http: {verb: 'get'},
         description: 'Get list of man power by project',
-        accepts: {arg: 'toolsAndEquipmentId', description: 'Id Tools And Equipment', type: 'number', http: {source: 'query'}},
+        accepts: {arg: 'toolsAndEquipmentId', description: 'Tools And Equipment Id', type: 'number', http: {source: 'query'}},
         returns: {arg: 'data', type: 'Array'},
       }
     );
