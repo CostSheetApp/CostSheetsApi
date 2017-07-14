@@ -68,7 +68,7 @@ module.exports = function(Project) {
       }
     );
 
-  Project.ConsolidateManPower = function(manPowerId, cb) {
+  Project.ConsolidateManPower = function(id, cb) {
     var response = [];
     var ds = Project.dataSource;
     var sql = 'select name ' +
@@ -101,7 +101,7 @@ module.exports = function(Project) {
               '        inner join costsheets.manpower as man ' +
               '                on man.id = sm.manpowerId ' +
               '  where p.isDeleted = 0 ' +
-              '    and p.id = 1 ' +
+              '    and p.id = ? ' +
               '    ) as temp ' +
               '  group by name ' +
               '        ,code ' +
@@ -109,7 +109,7 @@ module.exports = function(Project) {
 
     if (ds) {
       if (ds.connector) {
-        ds.connector.execute(sql, manPowerId, function(err, response) {
+        ds.connector.execute(sql, [id], function(err, response) {
           if (err)
             console.error(err);
           cb(null, response);
@@ -118,7 +118,19 @@ module.exports = function(Project) {
     }
   };
 
-  Project.ConsolidateToolsAndEquipment = function(toolsAndEquipmentId, cb) {
+  
+  Project.remoteMethod
+  (
+    'ConsolidateManPower',
+      {
+        http: {path: '/:id/ConsolidateManPower', verb: 'get'},
+        description: 'Get list of man power by project',
+        accepts: [{arg: 'id', description: 'Man Power Id', type: 'number',required: true}],
+        returns: {arg: 'data', type: 'array'},
+      }
+    );
+
+  Project.ConsolidateToolsAndEquipment = function(id, cb) {
     var response = [];
     var ds = Project.dataSource;
     var sql = 'select name ' +
@@ -151,7 +163,7 @@ module.exports = function(Project) {
               '        inner join costsheets.toolsandequipment as tool ' +
               '                on tool.id = st.toolsAndEquipmentId ' +
               '  where p.isDeleted = 0 ' +
-              '    and p.id = 1 ' +
+              '    and p.id = ? ' +
               '    ) as temp ' +
               '  group by name ' +
               '        ,code ' +
@@ -159,7 +171,7 @@ module.exports = function(Project) {
 
     if (ds) {
       if (ds.connector) {
-        ds.connector.execute(sql, toolsAndEquipmentId, function(err, response) {
+        ds.connector.execute(sql, [id], function(err, response) {
           if (err)
             console.error(err);
           cb(null, response);
@@ -168,27 +180,14 @@ module.exports = function(Project) {
     }
   };
 
-
-
-  Project.remoteMethod
-  (
-    'ConsolidateManPower',
-      {
-        http: {verb: 'get'},
-        description: 'Get list of man power by project',
-        accepts: {arg: 'manPowerId', description: 'Man Power Id', type: 'number', http: {source: 'query'}},
-        returns: {arg: 'data', type: 'Array'},
-      }
-    );
-  
   Project.remoteMethod
   (
     'ConsolidateToolsAndEquipment',
       {
-        http: {verb: 'get'},
-        description: 'Get list of man power by project',
-        accepts: {arg: 'toolsAndEquipmentId', description: 'Tools And Equipment Id', type: 'number', http: {source: 'query'}},
-        returns: {arg: 'data', type: 'Array'},
+        http: {path: '/:id/ConsolidateToolsAndEquipment', verb: 'get'},
+        description: 'Get list of tools and equipment by project',
+        accepts: [{arg: 'id', description: 'Tools And Equipment Id', type: 'number',required: true}],
+        returns: {arg: 'data', type: 'array'},
       }
     );
 };
