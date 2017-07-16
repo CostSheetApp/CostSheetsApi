@@ -22,7 +22,8 @@ module.exports = function(Project) {
                   '      ,(select cost.cost ' +
                   '          from costsheets.materialcosthistory as cost ' +
                   '          where cost.materialId = mate.id ' +
-                  '              and cost.createdAt <= sheet.createdAt ' +
+				  '			     and cost.regionId = ps.regionId ' +
+                  '              and cost.createdAt <= p.startDate ' +
                   '          order by cost.createdAt desc ' +
                   '          limit 1 ' +
                   '          ) Cost      ' +
@@ -74,8 +75,8 @@ module.exports = function(Project) {
     var sql = 'select name ' +
               '       ,code ' +
               '       ,description ' +
-              '       ,sum(ifnull(performance,0) * ifnull(totalUnit,0)) totalUnit ' +
-              '       ,sum(ifnull(performance,0) * ifnull(Cost, 0) * ifnull(totalUnit,0)) Total ' +
+              '       ,sum(ifnull(performance,1) * ifnull(totalUnit,0)) totalUnit ' +
+              '       ,sum(ifnull(performance,1) * ifnull(Cost, 0) * ifnull(totalUnit,0)) Total ' +
               '  from ( ' +
               '  select p.name ' +
               '        ,man.code ' +
@@ -86,7 +87,7 @@ module.exports = function(Project) {
               '            from costsheets.manpowercosthistory as cost ' +
               '            where cost.manpowerId = man.id ' +
               '              and cost.regionId = ps.regionId ' +
-              '              and cost.createdAt <= sheet.createdAt ' +
+              '              and cost.createdAt <= p.startDate ' +
               '            order by cost.createdAt desc ' +
               '            limit 1 ' +
               '          ) Cost ' +
@@ -129,15 +130,15 @@ module.exports = function(Project) {
         returns: {arg: 'data', type: 'array'},
       }
     );
-
+	
   Project.ConsolidateToolsAndEquipment = function(id, cb) {
     var response = [];
     var ds = Project.dataSource;
     var sql = 'select name ' +
               '        ,code ' +
               '        ,description ' +
-              '        ,sum(performance * totalUnit) totalUnit ' +
-              '        ,sum(performance * Cost * totalUnit) Total ' +
+              '        ,sum(ifnull(performance,1) * ifnull(totalUnit,0)) totalUnit ' +
+              '        ,sum(ifnull(performance,1) * ifnull(Cost, 0) * ifnull(totalUnit,0)) Total ' +
               '  from ( ' +
               '  select p.name ' +
               '        ,tool.code ' +
@@ -148,7 +149,7 @@ module.exports = function(Project) {
               '            from costsheets.toolsandequipmentcosthistory as cost ' +
               '            where cost.toolsAndEquipmentId = tool.id ' +
               '              and cost.regionId = ps.regionId ' +
-              '              and cost.createdAt <= sheet.createdAt ' +
+              '              and cost.createdAt <= p.startDate ' +
               '            order by cost.createdAt desc ' +
               '            limit 1 ' +
               '         ) Cost ' +
