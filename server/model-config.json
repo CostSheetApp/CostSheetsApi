@@ -118,5 +118,9 @@
   "ToolsAndEquipmentCostHistory": {
     "dataSource": "MySql",
     "public": true
+  },
+  "IndirectCost": {
+    "dataSource": "MySql",
+    "public": true
   }
 }

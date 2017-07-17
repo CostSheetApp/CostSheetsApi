@@ -60,6 +60,11 @@
       "model": "Entity",
       "foreignKey": "",
       "through": "EntityHasProjects"
+    },
+    "indirectCosts": {
+      "type": "hasMany",
+      "model": "IndirectCost",
+      "foreignKey": ""
     }
   },
   "acls": [],

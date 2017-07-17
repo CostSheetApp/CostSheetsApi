@@ -1,0 +1,39 @@
+{
+  "name": "IndirectCost",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "description": {
+      "type": "string",
+      "required": true,
+      "default": "New Indirect Cost"
+    },
+    "amount": {
+      "type": "number",
+      "default": 0
+    },
+    "type": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    }
+  },
+  "validations": [],
+  "relations": {
+    "project": {
+      "type": "belongsTo",
+      "model": "Project",
+      "foreignKey": ""
+    },
+    "indirectCosts": {
+      "type": "hasMany",
+      "model": "IndirectCost",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
