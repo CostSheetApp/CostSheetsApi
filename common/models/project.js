@@ -2,7 +2,7 @@
 
 module.exports = function(Project) {
   Project.ConsolidateMaterial = function(id, cb) {
-    console.log(`id ${id}`)
+    //console.log(`id ${id}`)
     var response = [];
     var ds = Project.dataSource;
     var sql = 'select name ' +

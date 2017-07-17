@@ -75,7 +75,33 @@ module.exports = function(Manpower) {
         ds.connector.execute(sql, [id], function(err, response) {
           if (err)
             console.error(err);
-          cb(null, response);
+		
+		var regions = [];
+		response.forEach((o) => {
+			if(regions[o.region]==undefined){
+				regions[o.region]=[];
+			}	
+			regions[o.region].push([o.createdAt.getTime(),o.cost]);
+		});
+
+		var data=[];
+		for (var key in regions)
+		{
+			data.push({
+				name: key,
+				data: regions[key],
+				tooltip: {
+					valueDecimals:2
+				},
+				marker: {
+							enabled: true,
+                            radius: 3
+						},
+				shadow: true,
+			});
+		}
+		
+          cb(null, data);
         });
       }
     }
@@ -86,6 +112,50 @@ module.exports = function(Manpower) {
     'CostHistory',
       {
         http: {path: '/:id/CostHistory', verb: 'get'},
+        description: 'Get list of cost history by man power',
+        accepts: [{arg: 'id', description: 'Man Power Id', type: 'number',required: true}],
+        returns: {arg: 'data', type: 'array'},
+      }
+    );
+	
+	
+	Manpower.CostHistoryData = function(id, cb) {
+    var response = [];
+    var ds = Manpower.dataSource;
+    var sql = 'select ms.id ' +
+			  '	      ,m.code ' +
+			  ' 	  ,m.description as ManPower ' +
+			  '	      ,r.name as region ' +
+			  '		  ,ms.cost ' +
+			  '		  ,ms.createdAt ' +
+			  '	 from costsheets.manpower as m ' +
+			  '		  inner join costsheets.manpowercosthistory as ms ' +
+			  '			      on ms.manpowerId = m.id ' +
+			  '		  inner join costsheets.region as r ' +
+			  '				  on r.id = ms.regionId ' +
+			  '				 and r.isDeleted = 0 ' +
+			  '	where m.isDeleted = 0 ' +
+			  '	  and m.id = ? ' +
+			  '	order by ms.createdAt ' +
+			  '		  ,r.name ' +
+			  '		  ,m.description';
+
+    if (ds) {
+      if (ds.connector) {
+        ds.connector.execute(sql, [id], function(err, response) {
+          if (err)
+            console.error(err);
+          cb(null, response);
+        });
+      }
+    }
+  };
+
+    Manpower.remoteMethod
+  (
+    'CostHistoryData',
+      {
+        http: {path: '/:id/CostHistoryData', verb: 'get'},
         description: 'Get list of cost history by man power',
         accepts: [{arg: 'id', description: 'Man Power Id', type: 'number',required: true}],
         returns: {arg: 'data', type: 'array'},

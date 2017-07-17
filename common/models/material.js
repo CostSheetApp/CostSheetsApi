@@ -79,7 +79,36 @@ module.exports = function(Material) {
         ds.connector.execute(sql, [id], function(err, response) {
           if (err)
             console.error(err);
-          cb(null, response);
+		
+		var regions = [];
+		response.forEach((o) => {
+			if(regions[o.region]==undefined){
+				regions[o.region]=[];
+			}	
+			regions[o.region].push([o.createdAt.getTime(),o.cost]);
+		});
+
+		var data=[];
+		for (var key in regions)
+		{
+			data.push({
+				name: key,
+				data: regions[key],
+				tooltip: {
+					valueDecimals:2
+				},
+				marker: {
+							enabled: true,
+                            radius: 3
+						},
+				shadow: true,
+			});
+		}
+		
+		//console.log(data);
+		
+		
+          cb(null, data);
         });
       }
     }
@@ -90,6 +119,50 @@ module.exports = function(Material) {
     'CostHistory',
       {
         http: {path: '/:id/CostHistory', verb: 'get'},
+        description: 'Get list of cost history by material',
+        accepts: [{arg: 'id', description: 'Material Id', type: 'number',required: true}],
+        returns: {arg: 'data', type: 'array'},
+      }
+    );
+	
+	Material.CostHistoryData = function(id, cb) {
+    //console.log(`Id Material ${id}`)
+    var response = [];
+    var ds = Material.dataSource;
+    var sql = 'select ms.id ' +
+		      '       ,m.code ' +
+			  ' 	  ,m.description as material ' +
+			  '	      ,r.name as region ' +
+			  '		  ,ms.cost ' +
+			  '		  ,ms.createdAt ' +
+			  '	 from costsheets.material as m ' +
+			  '		  inner join costsheets.materialcosthistory as ms ' +
+			  '			      on ms.materialId = m.id ' +
+			  '		  inner join costsheets.region as r ' +
+			  '				  on r.id = ms.regionId ' +
+			  '				 and r.isDeleted = 0 ' +
+			  '	where m.isDeleted = 0 ' +
+			  '	  and m.id = ? ' +
+			  '	order by ms.createdAt ' +
+			  '		  ,r.name ' +
+			  '		  ,m.description';
+
+    if (ds) {
+      if (ds.connector) {
+        ds.connector.execute(sql, [id], function(err, response) {
+          if (err)
+            console.error(err);
+          cb(null, response);
+        });
+      }
+    }
+  };
+
+    Material.remoteMethod
+  (
+    'CostHistoryData',
+      {
+        http: {path: '/:id/CostHistoryData', verb: 'get'},
         description: 'Get list of cost history by material',
         accepts: [{arg: 'id', description: 'Material Id', type: 'number',required: true}],
         returns: {arg: 'data', type: 'array'},
