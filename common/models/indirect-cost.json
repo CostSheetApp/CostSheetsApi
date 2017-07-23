@@ -1,36 +1,36 @@
 {
-  "name": "Job",
+  "name": "IndirectCost",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "code": {
-      "type": "number",
-      "required": true
-    },
     "description": {
       "type": "string",
       "required": true,
-      "default": "job description"
+      "default": "New Indirect Cost"
     },
-    "isDeleted": {
-      "type": "boolean",
+    "amount": {
+      "type": "number",
+      "default": 0
+    },
+    "type": {
+      "type": "number",
       "required": true,
-      "default": false
+      "default": 0
     }
   },
   "validations": [],
   "relations": {
-    "manpowers": {
-      "type": "hasMany",
-      "model": "Manpower",
+    "project": {
+      "type": "belongsTo",
+      "model": "Project",
       "foreignKey": ""
     },
-    "entity": {
-      "type": "belongsTo",
-      "model": "Entity",
+    "indirectCosts": {
+      "type": "hasMany",
+      "model": "IndirectCost",
       "foreignKey": ""
     }
   },

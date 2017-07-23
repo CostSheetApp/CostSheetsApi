@@ -20,16 +20,25 @@
     "budget": {
       "type": "number",
       "required": true,
+      "dataType": "decimal",
+      "precision": 18,
+      "scale": 4,
       "default": 0
     },
     "cost": {
       "type": "number",
       "required": true,
+      "dataType": "decimal",
+      "precision": 18,
+      "scale": 4,
       "default": 0
     },
     "profitPercentage": {
       "type": "number",
       "required": true,
+      "dataType": "decimal",
+      "precision": 10,
+      "scale": 4,
       "default": 0
     },
     "isDeleted": {
@@ -51,6 +60,11 @@
       "model": "Entity",
       "foreignKey": "",
       "through": "EntityHasProjects"
+    },
+    "indirectCosts": {
+      "type": "hasMany",
+      "model": "IndirectCost",
+      "foreignKey": ""
     }
   },
   "acls": [],

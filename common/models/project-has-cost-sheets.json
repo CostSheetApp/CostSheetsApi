@@ -9,11 +9,17 @@
     "totalUnit": {
       "type": "number",
       "required": true,
+      "dataType": "decimal",
+      "precision": 18,
+      "scale": 4,
       "default": 0
     },
     "totalCost": {
       "type": "number",
       "required": true,
+      "dataType": "decimal",
+      "precision": 18,
+      "scale": 4,
       "default": 0
     }
   },
