@@ -38,6 +38,11 @@
       "foreignKey": ""
     }
   },
+  "mixins": {
+    "CascadeDelete": {
+        "relations": ["indirectCosts"]
+      }
+  },
   "acls": [],
   "methods": {}
 }
