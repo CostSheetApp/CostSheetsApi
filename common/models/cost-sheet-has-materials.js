@@ -62,7 +62,8 @@ module.exports = function(Costsheethasmaterials) {
     //console.log(`id ${id}`)
     var response = [];
     var ds = Costsheethasmaterials.dataSource;
-    var sql = 'select sheet.costSheetId ' +
+    var sql = 'select  sheet.Id ' +
+			  '        ,sheet.costSheetId ' +
 			  '		   ,sheet.materialId ' +
 			  '		   ,hist.regionId ' +
 			  '		   ,mat.code ' +

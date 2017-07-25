@@ -61,7 +61,8 @@ module.exports = function(Costsheethasmanpower) {
     //console.log(`id ${id}`)
     var response = [];
     var ds = Costsheethasmanpower.dataSource;
-    var sql = 'select sheet.costSheetId ' +
+    var sql = 'select  sheet.Id ' +
+			  '        ,sheet.costSheetId ' +
 			  '		   ,sheet.manpowerId ' +
 			  '		   ,hist.regionId ' +
 			  '		   ,mat.code ' +
