@@ -12,11 +12,17 @@
     "minimumUnit": {
       "type": "number",
       "required": true,
+      "dataType": "decimal",
+      "precision": 10,
+      "scale": 4,
       "default": 0
     },
     "minimumCost": {
       "type": "number",
       "required": true,
+      "dataType": "decimal",
+      "precision": 10,
+      "scale": 4,
       "default": 0
     },
     "description": {
