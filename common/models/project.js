@@ -190,5 +190,54 @@ module.exports = function(Project) {
         accepts: [{arg: 'id', description: 'Tools And Equipment Id', type: 'number',required: true}],
         returns: {arg: 'data', type: 'array'},
       }
-    );
+  );
+
+
+   Project.ExportAsExcel = function(id,res, cb) {
+    let Excel = require('exceljs');
+ 
+    var workbook = new Excel.Workbook();
+    workbook.creator = 'Me';
+    workbook.lastModifiedBy = 'Her';
+    workbook.created = new Date(1985, 8, 30);
+    workbook.modified = new Date();
+    workbook.lastPrinted = new Date(2016, 9, 27);
+
+    var worksheet = workbook.addWorksheet('My Sheet', {properties:{tabColor:{argb:'FFC0000'}}});
+    var worksheet2 = workbook.addWorksheet('My Sheet2', {properties:{tabColor:{argb:'FFC0000'}}});
+
+    worksheet.columns = [
+        { header: 'Id', key: 'id', width: 10 },
+        { header: 'Name', key: 'name', width: 32 },
+        { header: 'D.O.B.', key: 'DOB', width: 10, outlineLevel: 1 }
+    ];
+
+    // Add a couple of Rows by key-value, after the last current row, using the column keys 
+    // worksheet.addRow({id: 1, name: 'John Doe', DOB: new Date(1970,1,1)});
+    // worksheet.addRow({id: 2, name: 'Jane Doe', DOB: new Date(1965,1,7)});
+    for(var i=0;i<3000;i++){
+      worksheet.addRow({id: i, name: 'Jane Doe' + i, DOB: new Date(1965,1,7)});
+    }
+
+//    worksheet.getCell('A5').value = { formula: 'A2+A3+A4', result: 6 };
+
+    res.attachment("test.xlsx")
+    workbook.xlsx.write(res) .then(function() {
+      res.end()
+    });
+ 
+  };
+
+  Project.remoteMethod
+  (
+    'ExportAsExcel',
+      {
+       accepts: [
+        {arg: 'id', type: 'string', required: true },
+        {arg: 'res', type: 'object', 'http': {source: 'res'}}
+      ],
+      returns: {},
+      http: {path: '/ExportAsExcel/:id', verb: 'get'}
+      }
+  );
 };
