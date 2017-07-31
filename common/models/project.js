@@ -169,6 +169,7 @@ module.exports = function(Project) {
               '  group by name ' +
               '        ,code ' +
               '        ,description';
+	
 
     if (ds) {
       if (ds.connector) {
@@ -194,37 +195,116 @@ module.exports = function(Project) {
 
 
    Project.ExportAsExcel = function(id,res, cb) {
-    let Excel = require('exceljs');
+	var response = [];
+	var dataMaterial = [];
+    var ds = Project.dataSource;
+    var sql = 'select name ' +
+                  '       ,code ' +
+                  '       ,description ' +
+                  '       ,unitsOfMeasurement ' +
+                  '       ,sum(ifnull(waste,0) * ifnull(performance,0) * ifnull(totalUnit,0)) totalUnit ' +
+                  '       ,sum(ifnull(waste,0) * ifnull(performance,0) * ifnull(Cost,0) * ifnull(totalUnit,0)) Total ' +
+                  '  from ( ' +
+                  '        select p.name ' +
+                  '      ,mate.code ' +
+                  '      ,mate.description ' +
+                  '      ,unit.description as unitsOfMeasurement ' +
+                  '      ,mate.waste ' +
+                  '      ,sm.performance ' +
+                  '      ,ps.totalUnit ' +
+                  '      ,(select cost.cost ' +
+                  '          from costsheets.materialcosthistory as cost ' +
+                  '          where cost.materialId = mate.id ' +
+				  '			     and cost.regionId = ps.regionId ' +
+                  '              and cost.createdAt <= p.startDate ' +
+                  '          order by cost.createdAt desc ' +
+                  '          limit 1 ' +
+                  '          ) Cost      ' +
+                  '  from costsheets.project as p ' +
+                  '      inner join costsheets.projecthascostsheets as ps  ' +
+                  '              on ps.projectId = p.id ' +
+                  '      inner join costsheets.costsheet as sheet ' +
+                  '              on sheet.id = ps.costSheetId ' +
+                  '              and sheet.isDeleted = 0 ' +
+                  '      inner join costsheets.costsheethasmaterials as sm ' +
+                  '              on sm.costSheetId = sheet.id ' +
+                  '      inner join costsheets.material as mate ' +
+                  '              on mate.id = sm.materialId ' +
+                  '      inner join costsheets.unitsofmeasurement as unit ' +
+                  '              on unit.id = mate.unitsOfMeasurementId ' +
+                  '  where p.isDeleted = 0 ' +
+                  '  and p.id = ? ' +
+                  '  ) as temp ' +
+                  '  group by name ' +
+                  '      ,code ' +
+                  '      ,description ' +
+                  '      ,unitsOfMeasurement;';
+    if (ds) {
+      if (ds.connector) {
+        ds.connector.execute(sql, [id], function(err, response) {
+			if (err)
+				console.error(err);
+			
+			
+			let Excel = require('exceljs');
  
-    var workbook = new Excel.Workbook();
-    workbook.creator = 'Me';
-    workbook.lastModifiedBy = 'Her';
-    workbook.created = new Date(1985, 8, 30);
-    workbook.modified = new Date();
-    workbook.lastPrinted = new Date(2016, 9, 27);
+			var workbook = new Excel.Workbook();
+			workbook.creator = 'Me';
+			workbook.lastModifiedBy = 'Her';
+			workbook.created = new Date(1985, 8, 30);
+			workbook.modified = new Date();
+			workbook.lastPrinted = new Date(2016, 9, 27);
 
-    var worksheet = workbook.addWorksheet('My Sheet', {properties:{tabColor:{argb:'FFC0000'}}});
-    var worksheet2 = workbook.addWorksheet('My Sheet2', {properties:{tabColor:{argb:'FFC0000'}}});
+			var worksheet = workbook.addWorksheet('Consolidado Materiales', {properties:{tabColor:{argb:'FFC0000'}}});
+			var worksheet2 = workbook.addWorksheet('My Sheet2', {properties:{tabColor:{argb:'FFC0000'}}});
 
-    worksheet.columns = [
-        { header: 'Id', key: 'id', width: 10 },
-        { header: 'Name', key: 'name', width: 32 },
-        { header: 'D.O.B.', key: 'DOB', width: 10, outlineLevel: 1 }
-    ];
+			worksheet.columns = [
+				{ header: 'Nombre', key: 'name', width: 10 }
+				,{ header: 'Codigo', key: 'code', width: 32 }
+				,{ header: 'Descripcion', key: 'description', width: 10 }
+				,{ header: 'Unidad de Medida1', key: 'unitsOfMeasurement', width: 10 }
+				,{ header: 'Unidades Totales', key: 'totalUnit', width: 10 }
+				,{ header: 'Total', key: 'Total', width: 10 }
+			];
+			
+			response.forEach((o) => {
+				console.log(o);
+				worksheet.addRow({ name: o.name, code: o.code, description: o.description, unitsOfMeasurement: o.unitsOfMeasurement, totalUnit: o.totalUnit, Total: o.Total});
+				console.log(o.name);
+			});
+			
+			res.attachment("test.xlsx")
+			workbook.xlsx.write(res) .then(function() {
+			  res.end()
+			});
+			
+			console.log(response.length);
+        });
+		console.log(response.length);
+      }
+    }
+	
+	
+	
+	
+	
+	//console.log(`Id Material ${id}`)
+	
+	
+	
 
     // Add a couple of Rows by key-value, after the last current row, using the column keys 
     // worksheet.addRow({id: 1, name: 'John Doe', DOB: new Date(1970,1,1)});
     // worksheet.addRow({id: 2, name: 'Jane Doe', DOB: new Date(1965,1,7)});
-    for(var i=0;i<3000;i++){
+    /*
+	for(var i=0;i<3000;i++){
       worksheet.addRow({id: i, name: 'Jane Doe' + i, DOB: new Date(1965,1,7)});
     }
+	*/
 
 //    worksheet.getCell('A5').value = { formula: 'A2+A3+A4', result: 6 };
 
-    res.attachment("test.xlsx")
-    workbook.xlsx.write(res) .then(function() {
-      res.end()
-    });
+    
  
   };
 
