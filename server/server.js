@@ -16,7 +16,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(loopback.token());
 
-
 app.start = function() {
   // start the web server
   return app.listen(function() {
