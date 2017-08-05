@@ -6,8 +6,8 @@
   "MySql": {
     "host": "costsheetsdb.cysxg70surok.us-east-1.rds.amazonaws.com",
     "port": 3306,
-    "url": "mysql://costsheets:costsheets123@costsheetsdb.cysxg70surok.us-east-1.rds.amazonaws.com/dev",
-    "database": "dev",
+    "url": "mysql://costsheets:costsheets123@costsheetsdb.cysxg70surok.us-east-1.rds.amazonaws.com/CostSheetsDB",
+    "database": "CostSheetsDB",
     "password": "costsheets123",
     "name": "MySql",
     "user": "costsheets",

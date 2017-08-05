@@ -1,0 +1,127 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../node_modules/loopback-ds-timestamp-mixin",
+      "../node_modules/loopback-cascade-delete-mixin",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "MySql",
+    "public": false
+  },
+  "AccessToken": {
+    "dataSource": "MySql",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "MySql",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "MySql",
+    "public": false,
+    "options": {
+      "strictObjectIDCoercion": true
+    }
+  },
+  "Role": {
+    "dataSource": "MySql",
+    "public": false
+  },
+  "Account": {
+    "dataSource": "MySql",
+    "public": true,
+    "options": {
+      "emailVerificationRequired": true
+    }
+  },
+  "Entity": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "Project": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "CostSheet": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "EntityHasProjects": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "EntityHasCostSheets": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "ProjectHasCostSheets": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "Email": {
+    "dataSource": "Mail"
+  },
+  "Region": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "Material": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "UnitsOfMeasurement": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "MaterialCostHistory": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "CostSheetHasMaterials": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "CostSheetHasManpower": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "CostSheetHasToolsAndEquipment": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "Job": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "Manpower": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "ManpowerCostHistory": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "ToolsAndEquipment": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "ToolsAndEquipmentCostHistory": {
+    "dataSource": "MySql",
+    "public": true
+  },
+  "IndirectCost": {
+    "dataSource": "MySql",
+    "public": true
+  }
+}
