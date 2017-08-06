@@ -16,11 +16,12 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(loopback.token());
 
-app.set('port',process.env.PORT || 3000);
+
 
 app.start = function() {
   // start the web server
-  return app.listen(function() {
+  var port=process.env.PORT || 3000;
+  return app.listen(port,function() {
     app.emit('started');
     var baseUrl = app.get('url').replace(/\/$/, '');
     console.log('Web server listening at: %s', baseUrl);
