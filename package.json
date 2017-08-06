@@ -19,6 +19,7 @@
     "loopback-component-explorer": "^4.0.0",
     "loopback-connector-mysql": "^2.4.1",
     "loopback-ds-timestamp-mixin": "^3.4.1",
+    "newrelic": "^2.0.2",
     "serve-favicon": "^2.0.1",
     "strong-error-handler": "^1.0.1"
   },
