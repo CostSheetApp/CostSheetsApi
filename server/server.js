@@ -16,6 +16,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(loopback.token());
 
+app.set('port',process.env.PORT || 3000);
+
 app.start = function() {
   // start the web server
   return app.listen(function() {
