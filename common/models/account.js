@@ -9,8 +9,8 @@ module.exports = function(Account) {
 
       if (ctx.isNewInstance != undefined && ctx.isNewInstance) {
         var account = ctx.instance;
-        var base_url = proccess.env.BASE_URL || "http://localhost:3001"
-        var url = base_url+"/login";
+        var baseUrl = proccess.env.BASE_URL || "http://localhost:3001"
+        var url = baseUrl+"/login";
         var options = {
           type: 'email',
           to: account.email,
@@ -35,8 +35,8 @@ module.exports = function(Account) {
 
   //send password reset link when requested
   Account.on('resetPasswordRequest', function(info) {
-    var base_url = proccess.env.BASE_URL || "http://localhost:3001"
-    var url = base_url+"/reset-password";
+    var baseUrl = proccess.env.BASE_URL || "http://localhost:3001"
+    var url = baseUrl+"/reset-password";
     var html = 'Click <a href="' + url + '?access_token=' + info.accessToken.id + '">here</a> to reset your password';
 
     Account
