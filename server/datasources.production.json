@@ -13,7 +13,23 @@
     "user": "costsheets",
     "connector": "mysql"
   },
-  "Mail": {
+    "Mail": {
+    "name": "Mail",
+    "connector": "mail",
+    "transports": [
+      {
+        "type": "SMTP",
+        "host": "smtp.sendgrid.net",
+        "secure": true,
+        "port": 465,
+        "auth": {
+          "user": "app74254509@heroku.com",
+          "pass": "jmypr9ai8190"
+        }
+      }
+    ]
+  },
+  "Gmail": {
     "name": "Mail",
     "connector": "mail",
     "transports": [
