@@ -14,7 +14,7 @@ module.exports = function(Account) {
         var options = {
           type: 'email',
           to: account.email,
-          from: 'costsheets.unitec@gmail.com',
+          from: process.env.SUBSCRIPTION_FROM_EMAIL || 'costsheets.unitec@gmail.com',
           subject: 'Thanks for registering.',
           template: path.resolve(__dirname, '../../server/views/verify.ejs'),
           redirect: url,
