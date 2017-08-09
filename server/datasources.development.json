@@ -4,13 +4,13 @@
     "connector": "memory"
   },
   "MySql": {
-    "host": "costsheetsdb.cysxg70surok.us-east-1.rds.amazonaws.com",
+    "host": "localhost",
     "port": 3306,
-    "url": "mysql://costsheets:costsheets123@costsheetsdb.cysxg70surok.us-east-1.rds.amazonaws.com/dev",
-    "database": "dev",
-    "password": "costsheets123",
+    "url": "mysql://afernandez:123456@localhost/CostSheets",
+    "database": "CostSheets",
+    "password": "123456",
     "name": "MySql",
-    "user": "costsheets",
+    "user": "afernandez",
     "connector": "mysql"
   },
     "Mail": {

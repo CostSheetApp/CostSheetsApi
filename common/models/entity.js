@@ -1,13 +1,19 @@
 'use strict';
 
 module.exports = function(Entity) {
-  var app = require('../../server/server');
+  var seed = require('../../server/seed/seed.js');
+  var regions = require('../../server/seed/data/Region.js');
+  var jobs = require('../../server/seed/data/Job.js');
 
   Entity.observe('after save', function(ctx, next) {
 
     if (ctx.isNewInstance != undefined && ctx.isNewInstance) {
       var entity = ctx.instance;
-      var User = app.models.Account; // works!
+
+      seed.AddRegions(Entity.app.models.Region,regions.map(o=>{o.entityId=entity.id; return o;}));
+      seed.AddJobs(Entity.app.models.Job,jobs.map(o=>{o.entityId=entity.id; return o;}));
+
+      var User = Entity.app.models.Account; // works!
       var newUser = {
         name: entity.name,
         isEnabled: true,

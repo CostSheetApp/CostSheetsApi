@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = function(Material) {
-  var app = require('../../server/server');
   Material.observe('before save', function(ctx, next) {
     console.log('Before Save', ctx.instance);
     var code = 1;
@@ -49,7 +48,7 @@ module.exports = function(Material) {
       if (!(ctx.instance.cost && ctx.instance.cost > 0) && !(ctx.instance.regionId && ctx.instance.regionId > 0))
         next();
 
-      app
+      Material
                 .models
                 .MaterialCostHistory
                 .create({
