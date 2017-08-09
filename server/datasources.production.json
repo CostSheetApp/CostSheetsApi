@@ -23,8 +23,8 @@
         "secure": true,
         "port": 465,
         "auth": {
-          "user": "app74254509@heroku.com",
-          "pass": "jmypr9ai8190"
+          "user": "sendgrid_user",
+          "pass": "sendgrid_pass"
         }
       }
     ]
