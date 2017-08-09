@@ -1,9 +1,10 @@
 'use strict';
 
-var config = require('../../server/config.json');
-var path = require('path');
+
 
 module.exports = function(Account) {
+  var config = require('../../server/config.json');
+  var path = require('path');
   //send verification email after registration
   Account
     .observe('after save', function(ctx, next) {
