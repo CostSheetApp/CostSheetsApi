@@ -13,7 +13,7 @@
     "user": "costsheets",
     "connector": "mysql"
   },
-    "Mail": {
+    "GMail": {
     "name": "Mail",
     "connector": "mail",
     "transports": [
@@ -29,7 +29,7 @@
       }
     ]
   },
-  "Gmail": {
+  "Mail": {
     "name": "Mail",
     "connector": "mail",
     "transports": [
