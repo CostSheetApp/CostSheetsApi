@@ -10,8 +10,8 @@ module.exports = function(Entity) {
     if (ctx.isNewInstance != undefined && ctx.isNewInstance) {
       var entity = ctx.instance;
 
-      seed.AddRegions(Entity.app.models.Region,regions.map(o=>{o.entityId=entity.id; return o;}));
-      seed.AddJobs(Entity.app.models.Job,jobs.map(o=>{o.entityId=entity.id; return o;}));
+      seed.AddRegions(Entity.app.models.Region,regions.map(function(o){o.entityId=entity.id; return o;}));
+      seed.AddJobs(Entity.app.models.Job,jobs.map(function(o){o.entityId=entity.id; return o;}));
 
       var User = Entity.app.models.Account; // works!
       var newUser = {
