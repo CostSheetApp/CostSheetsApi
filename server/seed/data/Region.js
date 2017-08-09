@@ -1,3 +1,5 @@
+'use strict';
+
 var Region = [
 { name: 'Tela', isDeleted: false, createdAt: new Date(), updatedAt: new Date() },
 { name: 'Yoro', isDeleted: false, createdAt: new Date(), updatedAt: new Date() },

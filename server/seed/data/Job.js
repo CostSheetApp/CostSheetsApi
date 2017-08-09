@@ -1,3 +1,5 @@
+'use strict';
+
 var Job = [
     { description: 'Albañil', isDeleted: false },
     { description: 'Ebanista', isDeleted: false },
