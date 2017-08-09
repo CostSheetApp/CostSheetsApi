@@ -1,3 +1,5 @@
+'use strict';
+
 var UnitsOfMeasurement = [
     { description: 'Kilolitro', abbreviation: 'kl', type: 1, isDeleted: false, createdAt: new Date(), updatedAt: new Date() },
     { description: 'Hectolitro', abbreviation: 'hl', type: 1, isDeleted: false, createdAt: new Date(), updatedAt: new Date() },

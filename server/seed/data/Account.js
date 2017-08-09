@@ -1,4 +1,6 @@
-export default accounts = [
+'use strict';
+
+var accounts = [
     {
         name: 'Alex Fernandez',
         username: 'afernandez',
@@ -16,3 +18,5 @@ export default accounts = [
         modifiedAt: new Date()
     }
 ];
+
+module.exports = accounts;
