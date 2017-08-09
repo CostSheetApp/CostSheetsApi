@@ -19,12 +19,12 @@
     "transports": [
       {
         "type": "SMTP",
-        "host": "smtp.mailgun.org",
+        "host": "smtp.sendgrid.net",
         "secure": true,
-        "port": 587,
+        "port": 465,
         "auth": {
-          "user": "postmaster@sandboxf4c44ca13ae6434299b11baaa02fff74.mailgun.org",
-          "pass": "1803b03319fe3aa33d8d21bd7de86ca2"
+          "user": "app74254509@heroku.com",
+          "pass": "jmypr9ai8190"
         }
       }
     ]
