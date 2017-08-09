@@ -4,13 +4,13 @@
     "connector": "memory"
   },
   "MySql": {
-    "host": "localhost",
+    "host": "costsheetsdb.cysxg70surok.us-east-1.rds.amazonaws.com",
     "port": 3306,
-    "url": "mysql://afernandez:123456@localhost/CostSheets",
-    "database": "CostSheets",
-    "password": "123456",
+    "url": "mysql://costsheets:costsheets123@costsheetsdb.cysxg70surok.us-east-1.rds.amazonaws.com/CostSheetsDB",
+    "database": "CostSheetsDB",
+    "password": "costsheets123",
     "name": "MySql",
-    "user": "afernandez",
+    "user": "costsheets",
     "connector": "mysql"
   },
     "Mail": {
@@ -23,8 +23,8 @@
         "secure": true,
         "port": 465,
         "auth": {
-          "user": "app74254509@heroku.com",
-          "pass": "jmypr9ai8190"
+          "user": "sendgrid_user",
+          "pass": "sendgrid_pass"
         }
       }
     ]
