@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = function(Toolsandequipment) {
-  var app = require('../../server/server');
   Toolsandequipment.observe('before save', function updateTimestamp(ctx, next) {
     var code = 1;
     var id = 0;
@@ -48,7 +47,7 @@ module.exports = function(Toolsandequipment) {
       if (!(ctx.instance.cost && ctx.instance.cost > 0) && !(ctx.instance.regionId && ctx.instance.regionId > 0))
         next();
 
-      app
+      Toolsandequipment
         .models
         .ToolsAndEquipmentCostHistory
         .create({

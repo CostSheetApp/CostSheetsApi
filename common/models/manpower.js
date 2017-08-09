@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(Manpower) {
-  var app = require('../../server/server');
+
   Manpower.observe('before save', function updateTimestamp(ctx, next) {
     var code = 1;
     var id = 0;
@@ -48,7 +48,7 @@ module.exports = function(Manpower) {
       if (!(ctx.instance.cost && ctx.instance.cost > 0) && !(ctx.instance.regionId && ctx.instance.regionId > 0))
         next();
 
-      app
+      Manpower
                 .models
                 .ManpowerCostHistory
                 .create({

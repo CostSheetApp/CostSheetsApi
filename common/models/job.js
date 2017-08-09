@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = function(Job) {
-  var app = require('../../server/server');
   Job.observe('before save', function(ctx, next) {
     var code = 1;
     var id = 0;
