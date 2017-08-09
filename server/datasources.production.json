@@ -13,23 +13,23 @@
     "user": "costsheets",
     "connector": "mysql"
   },
-    "GMail": {
+    "Mail": {
     "name": "Mail",
     "connector": "mail",
     "transports": [
       {
         "type": "SMTP",
-        "host": "smtp.sendgrid.net",
+        "host": "smtp.mailgun.org",
         "secure": true,
-        "port": 465,
+        "port": 587,
         "auth": {
-          "user": "sendgrid_user",
-          "pass": "sendgrid_pass"
+          "user": "postmaster@sandboxf4c44ca13ae6434299b11baaa02fff74.mailgun.org",
+          "pass": "1803b03319fe3aa33d8d21bd7de86ca2"
         }
       }
     ]
   },
-  "Mail": {
+  "Gmail": {
     "name": "Mail",
     "connector": "mail",
     "transports": [
