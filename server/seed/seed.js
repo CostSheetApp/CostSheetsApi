@@ -25,17 +25,6 @@ module.exports = {
             }
             return true;
         });
-    },
-    AddUnitsOfMeasurements: function(app) {
-        var UoMs = require('./data/UnitsOfMeasurement');
-        app.models.UnitsOfMeasurement.create(UoMs, function(err, res) {
-            if (err) {
-                return false
-            }
-
-            return true;
-        //console.log('Record created:', records);
-        });
     }
 };
 
