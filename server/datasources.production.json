@@ -6,43 +6,27 @@
   "MySql": {
     "host": "costsheetsdb.cysxg70surok.us-east-1.rds.amazonaws.com",
     "port": 3306,
-    "url": "mysql://costsheets:costsheets123@costsheetsdb.cysxg70surok.us-east-1.rds.amazonaws.com/CostSheetsDB",
-    "database": "CostSheetsDB",
+    "url": "mysql://costsheets:costsheets123@costsheets.cysxg70surok.us-east-1.rds.amazonaws.com/costsheets",
+    "database": "costsheets",
     "password": "costsheets123",
     "name": "MySql",
     "user": "costsheets",
     "connector": "mysql"
   },
-    "Mail": {
+  "Mail": {
     "name": "Mail",
+    "defaultForType": "mail",
     "connector": "mail",
-    "transports": [
-      {
-        "type": "SMTP",
-        "host": "smtp.sendgrid.net",
-        "secure": true,
-        "port": 465,
-        "auth": {
-          "user": "app74254509@heroku.com",
-          "pass": "jmypr9ai8190"
-        }
+    "transport": {
+      "type": "SMTP",
+      "host": "smtp.gmail.com",
+      "secure": true,
+      "secureConnection": true,
+      "port": 465,
+      "auth": {
+        "user": "costsheets.unitec@gmail.com",
+        "pass": "cs123456"
       }
-    ]
-  },
-  "Gmail": {
-    "name": "Mail",
-    "connector": "mail",
-    "transports": [
-      {
-        "type": "SMTP",
-        "host": "smtp.gmail.com",
-        "secure": true,
-        "port": 465,
-        "auth": {
-          "user": "costsheets.unitec@gmail.com",
-          "pass": "cs123456"
-        }
-      }
-    ]
+    }
   }
 }
