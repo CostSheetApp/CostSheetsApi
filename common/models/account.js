@@ -28,14 +28,13 @@ module.exports = function(Account) {
           protocol: protocol,
           text: text,
         };
-        // account.verify(options, function(err, response) {
-        //   if (err) {
-        //     Account.deleteById(account.id);
-        //     return next(err);
-        //   }
-        //   next();
-        // });
+        account.verify(options, function(err, response) {
+          if (err) {
+            Account.deleteById(account.id);
+            return next(err);
+          }
           next();
+        });
       } else {
         next();
       }
