@@ -67,7 +67,6 @@ module.exports = function(Material) {
   });
 
   Material.CostHistory = function(id, cb) {
-    //console.log(`Id Material ${id}`)
     var response = [];
     var ds = Material.dataSource;
     var sql = "select ms.id ,m.code ,m.description as material ,r.name as region ,ms.cost ,ms.createdAt \
@@ -141,7 +140,6 @@ module.exports = function(Material) {
   });
 
   Material.CostHistoryData = function(id, cb) {
-    //console.log(`Id Material ${id}`)
     var response = [];
     var ds = Material.dataSource;
     var sql = "select ms.id ,m.code ,m.description as material ,r.name as region ,ms.cost ,ms.createdAt \

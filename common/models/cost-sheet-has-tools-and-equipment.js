@@ -46,7 +46,6 @@ module.exports = function(Costsheethastoolsandequipment) {
   });
 
   Costsheethastoolsandequipment.DetailsToolsAndEquipment = function(id, cb) {
-    //console.log(`id ${id}`)
     var response = [];
     var ds = Costsheethastoolsandequipment.dataSource;
     var sql = "select sheet.Id ,sheet.costSheetId ,sheet.toolsAndEquipmentId ,hist.regionId ,mat.code ,mat.description ,ifnull(hist.cost, 0) cost ,\
