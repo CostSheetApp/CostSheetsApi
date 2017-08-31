@@ -4,13 +4,13 @@ module.exports = function(Costsheethasmanpower) {
   Costsheethasmanpower.TotalManPower = function(id, cb) {
     var response = [];
     var ds = Costsheethasmanpower.dataSource;
-    var sql = `select Man.costSheetId ,sum(Man.Total) Total from ( select sheet.costSheetId ,costHis.manpowerId ,costHis.regionId ,(ifnull(costHis.cost, 0) * ifnull(sheet.performance, 0)) Total 
-    from costsheets.CostSheetHasManpower as sheet 
-    inner join costsheets.CostSheet as ficha on ficha.id = sheet.costSheetId 
-    inner join costsheets.ManpowerCostHistory as costHis on costHis.manpowerId = sheet.manpowerId and costHis.regionId = ficha.regionId 
-    inner join ( select his.manpowerId ,his.regionId ,max(his.createdAt) createdAt 
-    from costsheets.ManpowerCostHistory as his group by his.manpowerId ,his.regionId ) his on his.manpowerId = costHis.manpowerId and his.regionId = costHis.regionId 
-    and his.createdAt = costHis.createdAt where sheet.isDeleted = 0 and sheet.costSheetId = ? ) as Man group by Man.costSheetId;`;
+    var sql = "select Man.costSheetId ,sum(Man.Total) Total from ( select sheet.costSheetId ,costHis.manpowerId ,costHis.regionId ,(ifnull(costHis.cost, 0) * ifnull(sheet.performance, 0)) Total \
+    from costsheets.CostSheetHasManpower as sheet \
+    inner join costsheets.CostSheet as ficha on ficha.id = sheet.costSheetId \
+    inner join costsheets.ManpowerCostHistory as costHis on costHis.manpowerId = sheet.manpowerId and costHis.regionId = ficha.regionId \
+    inner join ( select his.manpowerId ,his.regionId ,max(his.createdAt) createdAt \
+    from costsheets.ManpowerCostHistory as his group by his.manpowerId ,his.regionId ) his on his.manpowerId = costHis.manpowerId and his.regionId = costHis.regionId \
+    and his.createdAt = costHis.createdAt where sheet.isDeleted = 0 and sheet.costSheetId = ? ) as Man group by Man.costSheetId;";
 
     if (ds) {
       if (ds.connector) {
@@ -46,22 +46,21 @@ module.exports = function(Costsheethasmanpower) {
   });
 
   Costsheethasmanpower.DetailsManPowers = function(id, cb) {
-    //console.log(`id ${id}`)
     var response = [];
     var ds = Costsheethasmanpower.dataSource;
-    var sql = `select sheet.Id ,sheet.costSheetId ,sheet.manpowerId ,hist.regionId ,mat.code ,mat.description ,job.description job ,ifnull(hist.cost, 0) cost ,
-    ifnull(hist.performance, 0) performance ,ifnull(hist.Total, 0) Total from costsheets.CostSheetHasManpower as sheet 
-    inner join costsheets.Manpower as mat on mat.id = sheet.manpowerId 
-    inner join costsheets.Job as job on job.id = mat.jobId 
-    left join ( select sheet.id ,costHis.manpowerId ,costHis.regionId ,ifnull(costHis.cost, 0) cost ,ifnull(sheet.performance, 0) performance ,
-    (ifnull(costHis.cost, 0) * ifnull(sheet.performance, 0)) Total 
-    from costsheets.CostSheetHasManpower as sheet 
-    inner join costsheets.CostSheet as ficha on ficha.id = sheet.costSheetId 
-    inner join costsheets.ManpowerCostHistory as costHis on costHis.manpowerId = sheet.manpowerId and costHis.regionId = ficha.regionId 
-    inner join ( select his.manpowerId ,his.regionId ,max(his.createdAt) createdAt 
-    from costsheets.ManpowerCostHistory as his group by his.manpowerId ,his.regionId ) his 
-    on his.manpowerId = costHis.manpowerId and his.regionId = costHis.regionId and his.createdAt = costHis.createdAt 
-    where sheet.isDeleted = 0 and sheet.costSheetId = ? ) as hist on hist.id = sheet.id where sheet.isDeleted = 0 and sheet.costSheetId = ? order by sheet.id;`;
+    var sql = "select sheet.Id ,sheet.costSheetId ,sheet.manpowerId ,hist.regionId ,mat.code ,mat.description ,job.description job ,ifnull(hist.cost, 0) cost ,\
+    ifnull(hist.performance, 0) performance ,ifnull(hist.Total, 0) Total from costsheets.CostSheetHasManpower as sheet \
+    inner join costsheets.Manpower as mat on mat.id = sheet.manpowerId \
+    inner join costsheets.Job as job on job.id = mat.jobId \
+    left join ( select sheet.id ,costHis.manpowerId ,costHis.regionId ,ifnull(costHis.cost, 0) cost ,ifnull(sheet.performance, 0) performance ,\
+    (ifnull(costHis.cost, 0) * ifnull(sheet.performance, 0)) Total \
+    from costsheets.CostSheetHasManpower as sheet \
+    inner join costsheets.CostSheet as ficha on ficha.id = sheet.costSheetId \
+    inner join costsheets.ManpowerCostHistory as costHis on costHis.manpowerId = sheet.manpowerId and costHis.regionId = ficha.regionId \
+    inner join ( select his.manpowerId ,his.regionId ,max(his.createdAt) createdAt \
+    from costsheets.ManpowerCostHistory as his group by his.manpowerId ,his.regionId ) his \
+    on his.manpowerId = costHis.manpowerId and his.regionId = costHis.regionId and his.createdAt = costHis.createdAt \
+    where sheet.isDeleted = 0 and sheet.costSheetId = ? ) as hist on hist.id = sheet.id where sheet.isDeleted = 0 and sheet.costSheetId = ? order by sheet.id;";
 
     if (ds) {
       if (ds.connector) {

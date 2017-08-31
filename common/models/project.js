@@ -2,20 +2,19 @@
 
 module.exports = function(Project) {
   Project.ConsolidateMaterial = function(id, cb) {
-    //console.log(`id ${id}`)
     var response = [];
     var ds = Project.dataSource;
-    var sql = `select name ,code ,description ,unitsOfMeasurement ,sum(ifnull(waste,0) * ifnull(performance,0) * ifnull(totalUnit,0)) totalUnit ,
-    sum(ifnull(waste,0) * ifnull(performance,0) * ifnull(Cost,0) * ifnull(totalUnit,0)) Total 
-    from ( select p.name ,mate.code ,mate.description ,unit.description as unitsOfMeasurement ,mate.waste ,sm.performance ,ps.totalUnit ,
-    (select cost.cost from costsheets.MaterialCostHistory as cost 
-    where cost.materialId = mate.id and cost.regionId = ps.regionId and cost.createdAt <= p.startDate order by cost.createdAt desc limit 1 ) Cost 
-    from costsheets.Project as p inner join costsheets.ProjectHasCostSheets as ps on ps.projectId = p.id 
-    inner join costsheets.CostSheet as sheet on sheet.id = ps.costSheetId and sheet.isDeleted = 0 
-    inner join costsheets.CostSheetHasMaterials as sm on sm.costSheetId = sheet.id 
-    inner join costsheets.Material as mate on mate.id = sm.materialId 
-    inner join costsheets.UnitsOfMeasurement as unit on unit.id = mate.unitsOfMeasurementId 
-    where p.isDeleted = 0 and p.id = ? ) as temp group by name ,code ,description ,unitsOfMeasurement`;
+    var sql = "select name ,code ,description ,unitsOfMeasurement ,sum(ifnull(waste,0) * ifnull(performance,0) * ifnull(totalUnit,0)) totalUnit ,\
+    sum(ifnull(waste,0) * ifnull(performance,0) * ifnull(Cost,0) * ifnull(totalUnit,0)) Total \
+    from ( select p.name ,mate.code ,mate.description ,unit.description as unitsOfMeasurement ,mate.waste ,sm.performance ,ps.totalUnit ,\
+    (select cost.cost from costsheets.MaterialCostHistory as cost \
+    where cost.materialId = mate.id and cost.regionId = ps.regionId and cost.createdAt <= p.startDate order by cost.createdAt desc limit 1 ) Cost \
+    from costsheets.Project as p inner join costsheets.ProjectHasCostSheets as ps on ps.projectId = p.id \
+    inner join costsheets.CostSheet as sheet on sheet.id = ps.costSheetId and sheet.isDeleted = 0 \
+    inner join costsheets.CostSheetHasMaterials as sm on sm.costSheetId = sheet.id \
+    inner join costsheets.Material as mate on mate.id = sm.materialId \
+    inner join costsheets.UnitsOfMeasurement as unit on unit.id = mate.unitsOfMeasurementId \
+    where p.isDeleted = 0 and p.id = ? ) as temp group by name ,code ,description ,unitsOfMeasurement";
 
     if (ds) {
       if (ds.connector) {
@@ -53,15 +52,16 @@ module.exports = function(Project) {
   Project.ConsolidateManPower = function(id, cb) {
     var response = [];
     var ds = Project.dataSource;
-    var sql = `select name ,code ,description ,sum(ifnull(performance,1) * ifnull(totalUnit,0)) totalUnit ,sum(ifnull(performance,1) * ifnull(Cost, 0) * ifnull(totalUnit,0)) Total 
-    from ( select p.name ,man.code ,man.description ,sm.performance ,ps.totalUnit ,
-    (select cost.cost from costsheets.ManpowerCostHistory as cost 
-    where cost.manpowerId = man.id and cost.regionId = ps.regionId and cost.createdAt <= p.startDate order by cost.createdAt desc limit 1 ) Cost 
-    from costsheets.Project as p inner join costsheets.ProjectHasCostSheets as ps on ps.projectId = p.id 
-    inner join costsheets.CostSheet as sheet on sheet.id = ps.costSheetId and sheet.isDeleted = 0 
-    inner join costsheets.CostSheetHasManpower as sm on sm.costSheetId = sheet.id 
-    inner join costsheets.Manpower as man on man.id = sm.manpowerId 
-    where p.isDeleted = 0 and p.id = ? ) as temp group by name ,code ,description`;
+    var sql = "select name ,code ,description ,sum(ifnull(performance,1) * ifnull(totalUnit,0)) totalUnit ,\
+    sum(ifnull(performance,1) * ifnull(Cost, 0) * ifnull(totalUnit,0)) Total \
+    from ( select p.name ,man.code ,man.description ,sm.performance ,ps.totalUnit ,\
+    (select cost.cost from costsheets.ManpowerCostHistory as cost \
+    where cost.manpowerId = man.id and cost.regionId = ps.regionId and cost.createdAt <= p.startDate order by cost.createdAt desc limit 1 ) Cost \
+    from costsheets.Project as p inner join costsheets.ProjectHasCostSheets as ps on ps.projectId = p.id \
+    inner join costsheets.CostSheet as sheet on sheet.id = ps.costSheetId and sheet.isDeleted = 0 \
+    inner join costsheets.CostSheetHasManpower as sm on sm.costSheetId = sheet.id \
+    inner join costsheets.Manpower as man on man.id = sm.manpowerId \
+    where p.isDeleted = 0 and p.id = ? ) as temp group by name ,code ,description";
 
     if (ds) {
       if (ds.connector) {
@@ -99,15 +99,16 @@ module.exports = function(Project) {
   Project.ConsolidateToolsAndEquipment = function(id, cb) {
     var response = [];
     var ds = Project.dataSource;
-    var sql = `select name ,code ,description ,sum(ifnull(performance,1) * ifnull(totalUnit,0)) totalUnit ,sum(ifnull(performance,1) * ifnull(Cost, 0) * ifnull(totalUnit,0)) Total 
-    from ( select p.name ,tool.code ,tool.description ,st.performance ,ps.totalUnit ,
-    (select cost.cost from costsheets.ToolsAndEquipmentCostHistory as cost 
-    where cost.toolsAndEquipmentId = tool.id and cost.regionId = ps.regionId and cost.createdAt <= p.startDate order by cost.createdAt desc limit 1 ) Cost 
-    from costsheets.Project as p inner join costsheets.ProjectHasCostSheets as ps on ps.projectId = p.id 
-    inner join costsheets.CostSheet as sheet on sheet.id = ps.costSheetId and sheet.isDeleted = 0 
-    inner join costsheets.CostSheetHasToolsAndEquipment as st on st.costSheetId = sheet.id 
-    inner join costsheets.ToolsAndEquipment as tool on tool.id = st.toolsAndEquipmentId 
-    where p.isDeleted = 0 and p.id = ? ) as temp group by name ,code ,description`;
+    var sql = "select name ,code ,description ,sum(ifnull(performance,1) * ifnull(totalUnit,0)) totalUnit ,\
+    sum(ifnull(performance,1) * ifnull(Cost, 0) * ifnull(totalUnit,0)) Total \
+    from ( select p.name ,tool.code ,tool.description ,st.performance ,ps.totalUnit ,\
+    (select cost.cost from costsheets.ToolsAndEquipmentCostHistory as cost \
+    where cost.toolsAndEquipmentId = tool.id and cost.regionId = ps.regionId and cost.createdAt <= p.startDate order by cost.createdAt desc limit 1 ) Cost \
+    from costsheets.Project as p inner join costsheets.ProjectHasCostSheets as ps on ps.projectId = p.id \
+    inner join costsheets.CostSheet as sheet on sheet.id = ps.costSheetId and sheet.isDeleted = 0 \
+    inner join costsheets.CostSheetHasToolsAndEquipment as st on st.costSheetId = sheet.id \
+    inner join costsheets.ToolsAndEquipment as tool on tool.id = st.toolsAndEquipmentId \
+    where p.isDeleted = 0 and p.id = ? ) as temp group by name ,code ,description";
 
     if (ds) {
       if (ds.connector) {
@@ -146,17 +147,17 @@ module.exports = function(Project) {
     var response = [];
     var dataMaterial = [];
     var ds = Project.dataSource;
-    var sql = `select name ,code ,description ,unitsOfMeasurement ,sum(ifnull(waste,0) * ifnull(performance,0) * ifnull(totalUnit,0)) totalUnit ,
-    sum(ifnull(waste,0) * ifnull(performance,0) * ifnull(Cost,0) * ifnull(totalUnit,0)) Total 
-    from ( select p.name ,mate.code ,mate.description ,unit.description as unitsOfMeasurement ,mate.waste ,sm.performance ,ps.totalUnit ,
-    (select cost.cost from costsheets.MaterialCostHistory as cost 
-    where cost.materialId = mate.id and cost.regionId = ps.regionId and cost.createdAt <= p.startDate order by cost.createdAt desc limit 1 ) Cost 
-    from costsheets.Project as p inner join costsheets.ProjectHasCostSheets as ps on ps.projectId = p.id 
-    inner join costsheets.CostSheet as sheet on sheet.id = ps.costSheetId and sheet.isDeleted = 0 
-    inner join costsheets.CostSheetHasMaterials as sm on sm.costSheetId = sheet.id 
-    inner join costsheets.Material as mate on mate.id = sm.materialId 
-    inner join costsheets.UnitsOfMeasurement as unit on unit.id = mate.unitsOfMeasurementId 
-    where p.isDeleted = 0 and p.id = ? ) as temp group by name ,code ,description ,unitsOfMeasurement;`;
+    var sql = "select name ,code ,description ,unitsOfMeasurement ,sum(ifnull(waste,0) * ifnull(performance,0) * ifnull(totalUnit,0)) totalUnit ,\
+    sum(ifnull(waste,0) * ifnull(performance,0) * ifnull(Cost,0) * ifnull(totalUnit,0)) Total \
+    from ( select p.name ,mate.code ,mate.description ,unit.description as unitsOfMeasurement ,mate.waste ,sm.performance ,ps.totalUnit ,\
+    (select cost.cost from costsheets.MaterialCostHistory as cost \
+    where cost.materialId = mate.id and cost.regionId = ps.regionId and cost.createdAt <= p.startDate order by cost.createdAt desc limit 1 ) Cost \
+    from costsheets.Project as p inner join costsheets.ProjectHasCostSheets as ps on ps.projectId = p.id \
+    inner join costsheets.CostSheet as sheet on sheet.id = ps.costSheetId and sheet.isDeleted = 0 \
+    inner join costsheets.CostSheetHasMaterials as sm on sm.costSheetId = sheet.id \
+    inner join costsheets.Material as mate on mate.id = sm.materialId \
+    inner join costsheets.UnitsOfMeasurement as unit on unit.id = mate.unitsOfMeasurementId \
+    where p.isDeleted = 0 and p.id = ? ) as temp group by name ,code ,description ,unitsOfMeasurement;";
     if (ds) {
       if (ds.connector) {
         ds
@@ -243,18 +244,6 @@ module.exports = function(Project) {
         console.log(response.length);
       }
     }
-
-    // console.log(`Id Material ${id}`) Add a couple of Rows by key-value, after the
-    // last current row, using the column keys worksheet.addRow({id: 1, name: 'John
-    // Doe', DOB: new Date(1970,1,1)}); worksheet.addRow({id: 2, name: 'Jane Doe',
-    // DOB: new Date(1965,1,7)});
-    /*
-	for(var i=0;i<3000;i++){
-      worksheet.addRow({id: i, name: 'Jane Doe i, DOB: new Date(1965,1,7)});
-    }
-	*/
-
-    //    worksheet.getCell('A5').value = { formula: 'A2+A3+A4', result: 6 };
   };
 
   Project.remoteMethod('ExportAsExcel', {
