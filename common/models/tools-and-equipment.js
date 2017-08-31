@@ -69,12 +69,10 @@ module.exports = function(Toolsandequipment) {
   Toolsandequipment.CostHistory = function(id, cb) {
     var response = [];
     var ds = Toolsandequipment.dataSource;
-    var sql = 'select ms.id        ,m.code        ,m.description as ToolandEquipment 	      ,r.' +
-      'name as region 		  ,ms.cost 		  ,ms.createdAt 	 from costsheets.toolsandequipmen' +
-      't as m 		  inner join costsheets.toolsandequipmentcosthistory as ms 		          ' +
-      'on ms.toolsAndEquipmentId = m.id 		  inner join costsheets.region as r          ' +
-      '      on r.id = ms.regionId               and r.isDeleted = 0 	where m.isDeleted' +
-      ' = 0 	  and m.id = ? 	order by ms.createdAt 		  ,r.name 		  ,m.description';
+    var sql = `select ms.id ,m.code ,m.description as ToolandEquipment ,r.name as region ,ms.cost ,ms.createdAt from costsheets.ToolsAndEquipment as m 
+    inner join costsheets.ToolsAndEquipmentCostHistory as ms on ms.toolsAndEquipmentId = m.id 
+    inner join costsheets.Region as r on r.id = ms.regionId and r.isDeleted = 0 
+    where m.isDeleted = 0 and m.id = ? order by ms.createdAt ,r.name ,m.description`;
 
     if (ds) {
       if (ds.connector) {
@@ -142,12 +140,10 @@ module.exports = function(Toolsandequipment) {
   Toolsandequipment.CostHistoryData = function(id, cb) {
     var response = [];
     var ds = Toolsandequipment.dataSource;
-    var sql = 'select ms.id        ,m.code        ,m.description as ToolandEquipment 	      ,r.' +
-      'name as region 		  ,ms.cost 		  ,ms.createdAt 	 from costsheets.toolsandequipmen' +
-      't as m 		  inner join costsheets.toolsandequipmentcosthistory as ms 		          ' +
-      'on ms.toolsAndEquipmentId = m.id 		  inner join costsheets.region as r          ' +
-      '      on r.id = ms.regionId               and r.isDeleted = 0 	where m.isDeleted' +
-      ' = 0 	  and m.id = ? 	order by ms.createdAt 		  ,r.name 		  ,m.description';
+    var sql = `select ms.id ,m.code ,m.description as ToolandEquipment ,r.name as region ,ms.cost ,ms.createdAt 
+    from costsheets.ToolsAndEquipment as m inner join costsheets.ToolsAndEquipmentCostHistory as ms on ms.toolsAndEquipmentId = m.id 
+    inner join costsheets.Region as r on r.id = ms.regionId and r.isDeleted = 0 
+    where m.isDeleted = 0 and m.id = ? order by ms.createdAt ,r.name ,m.description`;
 
     if (ds) {
       if (ds.connector) {

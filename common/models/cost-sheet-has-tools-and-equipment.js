@@ -4,20 +4,13 @@ module.exports = function(Costsheethastoolsandequipment) {
   Costsheethastoolsandequipment.TotalToolEquipment = function(id, cb) {
     var response = [];
     var ds = Costsheethastoolsandequipment.dataSource;
-    var sql = 'select Man.costSheetId 			 ,sum(Man.Total) Total 		from ( 			select sheet.costSh' +
-        'eetId 					 ,costHis.toolsAndEquipmentId 					 ,costHis.regionId 					 ,(ifnull(' +
-        'costHis.cost, 0) * ifnull(sheet.performance, 0)) Total 				from costsheets.costs' +
-        'heethastoolsandequipment as sheet						 inner join costsheets.costsheet as ficha' +
-        '								 on ficha.id = sheet.costSheetId 					 inner join costsheets.toolsandequ' +
-        'ipmentcosthistory as costHis 							 on costHis.toolsAndEquipmentId = sheet.tool' +
-        'sAndEquipmentId 							and costHis.regionId = ficha.regionId 					 inner join ( ' +
-        '								 select his.toolsAndEquipmentId 										,his.regionId 										,max(h' +
-        'is.createdAt) createdAt 								 from costsheets.toolsandequipmentcosthistory as' +
-        ' his 								group by his.toolsAndEquipmentId 										,his.regionId 								) ' +
-        'his 							 on his.toolsAndEquipmentId = costHis.toolsAndEquipmentId 							and ' +
-        'his.regionId = costHis.regionId 							and his.createdAt = costHis.createdAt 			' +
-        'where sheet.isDeleted = 0 				and sheet.costSheetId = ? 			) as Man 	group by Ma' +
-        'n.costSheetId;';
+    var sql = `select Man.costSheetId ,sum(Man.Total) Total from ( select sheet.costSheetId ,costHis.toolsAndEquipmentId ,costHis.regionId ,
+      (ifnull(costHis.cost, 0) * ifnull(sheet.performance, 0)) Total from costsheets.CostSheetHasToolsAndEquipment as sheet 
+      inner join costsheets.CostSheet as ficha on ficha.id = sheet.costSheetId 
+      inner join costsheets.ToolsAndEquipmentCostHistory as costHis on costHis.toolsAndEquipmentId = sheet.toolsAndEquipmentId and costHis.regionId = ficha.regionId 
+      inner join ( select his.toolsAndEquipmentId ,his.regionId ,max(his.createdAt) createdAt from costsheets.ToolsAndEquipmentCostHistory as his 
+      group by his.toolsAndEquipmentId ,his.regionId ) his on his.toolsAndEquipmentId = costHis.toolsAndEquipmentId and his.regionId = costHis.regionId 
+      and his.createdAt = costHis.createdAt where sheet.isDeleted = 0 and sheet.costSheetId = ? ) as Man group by Man.costSheetId;`;
 
     if (ds) {
       if (ds.connector) {
@@ -56,27 +49,17 @@ module.exports = function(Costsheethastoolsandequipment) {
     //console.log(`id ${id}`)
     var response = [];
     var ds = Costsheethastoolsandequipment.dataSource;
-    var sql = 'select	sheet.Id 				,sheet.costSheetId 			 ,sheet.toolsAndEquipmentId 			 ,hist.' +
-        'regionId 			 ,mat.code 			 ,mat.description 			 ,ifnull(hist.cost, 0) cost 			 ,' +
-        'ifnull(hist.performance, 0) performance 			 ,ifnull(hist.Total, 0) Total 		from ' +
-        'costsheets.costsheethastoolsandequipment as sheet				 inner join costsheets.tool' +
-        'sandequipment as mat 					 on mat.id = sheet.toolsAndEquipmentId 			left join ( ' +
-        '						select sheet.id 								 ,costHis.toolsAndEquipmentId 								 ,costHis.re' +
-        'gionId 								 ,ifnull(costHis.cost, 0) cost 								 ,ifnull(sheet.performance' +
-        ', 0) performance 								 ,(ifnull(costHis.cost, 0) * ifnull(sheet.performance, ' +
-        '0)) Total 							from costsheets.costsheethastoolsandequipment as sheet									' +
-        ' inner join costsheets.costsheet as ficha											 on ficha.id = sheet.costShe' +
-        'etId 								 inner join costsheets.toolsandequipmentcosthistory as costHis 				' +
-        '						 on costHis.toolsAndEquipmentId = sheet.toolsAndEquipmentId 										and ' +
-        'costHis.regionId = ficha.regionId 								 inner join ( 											 select his.t' +
-        'oolsAndEquipmentId 													,his.regionId 													,max(his.createdAt) c' +
-        'reatedAt 											 from costsheets.toolsandequipmentcosthistory as his 							' +
-        '				group by his.toolsAndEquipmentId 													,his.regionId  											) hi' +
-        's 										 on his.toolsAndEquipmentId = costHis.toolsAndEquipmentId 										' +
-        'and his.regionId = costHis.regionId 										and his.createdAt = costHis.create' +
-        'dAt 						where sheet.isDeleted = 0 							and sheet.costSheetId = ? 	) as hist ' +
-        '	on hist.id = sheet.id 	where sheet.isDeleted = 0  and sheet.costSheetId = ? 	or' +
-        'der by sheet.id;';
+    var sql = `select sheet.Id ,sheet.costSheetId ,sheet.toolsAndEquipmentId ,hist.regionId ,mat.code ,mat.description ,ifnull(hist.cost, 0) cost ,
+    ifnull(hist.performance, 0) performance ,ifnull(hist.Total, 0) Total from costsheets.CostSheetHasToolsAndEquipment as sheet 
+    inner join costsheets.ToolsAndEquipment as mat on mat.id = sheet.toolsAndEquipmentId 
+    left join ( select sheet.id ,costHis.toolsAndEquipmentId ,costHis.regionId ,ifnull(costHis.cost, 0) cost ,ifnull(sheet.performance, 0) performance ,
+    (ifnull(costHis.cost, 0) * ifnull(sheet.performance, 0)) Total from costsheets.CostSheetHasToolsAndEquipment as sheet 
+    inner join costsheets.CostSheet as ficha on ficha.id = sheet.costSheetId 
+    inner join costsheets.ToolsAndEquipmentCostHistory as costHis on costHis.toolsAndEquipmentId = sheet.toolsAndEquipmentId and costHis.regionId = ficha.regionId 
+    inner join ( select his.toolsAndEquipmentId ,his.regionId ,max(his.createdAt) createdAt 
+    from costsheets.ToolsAndEquipmentCostHistory as his group by his.toolsAndEquipmentId ,his.regionId ) his 
+    on his.toolsAndEquipmentId = costHis.toolsAndEquipmentId and his.regionId = costHis.regionId and his.createdAt = costHis.createdAt 
+    where sheet.isDeleted = 0 and sheet.costSheetId = ? ) as hist on hist.id = sheet.id where sheet.isDeleted = 0 and sheet.costSheetId = ? order by sheet.id;`;
 
     if (ds) {
       if (ds.connector) {

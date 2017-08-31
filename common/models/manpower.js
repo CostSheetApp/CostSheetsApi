@@ -69,12 +69,10 @@ module.exports = function(Manpower) {
   Manpower.CostHistory = function(id, cb) {
     var response = [];
     var ds = Manpower.dataSource;
-    var sql = 'select ms.id 	      ,m.code  	  ,m.description as ManPower 	      ,r.name as reg' +
-      'ion 		  ,ms.cost 		  ,ms.createdAt 	 from costsheets.manpower as m 		  inner joi' +
-      'n costsheets.manpowercosthistory as ms 			      on ms.manpowerId = m.id 		  inne' +
-      'r join costsheets.region as r 				  on r.id = ms.regionId 				 and r.isDeleted =' +
-      ' 0 	where m.isDeleted = 0 	  and m.id = ? 	order by ms.createdAt 		  ,r.name 		 ' +
-      ' ,m.description';
+    var sql = `select ms.id ,m.code ,m.description as ManPower ,r.name as region ,ms.cost ,ms.createdAt from costsheets.Manpower as m 
+    inner join costsheets.ManpowerCostHistory as ms on ms.manpowerId = m.id 
+    inner join costsheets.Region as r on r.id = ms.regionId and r.isDeleted = 0 
+    where m.isDeleted = 0 and m.id = ? order by ms.createdAt ,r.name ,m.description`;
 
     if (ds) {
       if (ds.connector) {
@@ -142,12 +140,9 @@ module.exports = function(Manpower) {
   Manpower.CostHistoryData = function(id, cb) {
     var response = [];
     var ds = Manpower.dataSource;
-    var sql = 'select ms.id 	      ,m.code  	  ,m.description as ManPower 	      ,r.name as reg' +
-      'ion 		  ,ms.cost 		  ,ms.createdAt 	 from costsheets.manpower as m 		  inner joi' +
-      'n costsheets.manpowercosthistory as ms 			      on ms.manpowerId = m.id 		  inne' +
-      'r join costsheets.region as r 				  on r.id = ms.regionId 				 and r.isDeleted =' +
-      ' 0 	where m.isDeleted = 0 	  and m.id = ? 	order by ms.createdAt 		  ,r.name 		 ' +
-      ' ,m.description';
+    var sql = `select ms.id ,m.code ,m.description as ManPower ,r.name as region ,ms.cost ,ms.createdAt from costsheets.Manpower as m 
+    inner join costsheets.ManpowerCostHistory as ms on ms.manpowerId = m.id inner join costsheets.Region as r on r.id = ms.regionId and r.isDeleted = 0 
+    where m.isDeleted = 0 and m.id = ? order by ms.createdAt ,r.name ,m.description`;
 
     if (ds) {
       if (ds.connector) {
