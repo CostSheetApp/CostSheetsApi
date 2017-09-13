@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/lexfernandez/CostSheetsApi.svg?branch=master)](https://travis-ci.org/lexfernandez/CostSheetsApi)
+[![Build Status](https://travis-ci.org/CostSheetApp/CostSheetsApi.svg?branch=master)](https://travis-ci.org/lexfernandez/CostSheetsApi)
 
 # My Application
 
