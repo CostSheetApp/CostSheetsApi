@@ -35,7 +35,9 @@ var UnitsOfMeasurement = [
     { description: 'Bolsa', abbreviation: 'bolsa', type: 5, isDeleted: false, createdAt: new Date(), updatedAt: new Date() },
     { description: 'Lance', abbreviation: 'lance', type: 5, isDeleted: false, createdAt: new Date(), updatedAt: new Date() },
     { description: 'Metro Cubico', abbreviation: 'm3', type: 1, isDeleted: false, createdAt: new Date(), updatedAt: new Date() },
-    { description: 'Metro Cuadrado', abbreviation: 'm2', type: 2, isDeleted: false, createdAt: new Date(), updatedAt: new Date() }
+    { description: 'Metro Cuadrado', abbreviation: 'm2', type: 2, isDeleted: false, createdAt: new Date(), updatedAt: new Date() },
+    { description: 'Pie tablon', abbreviation: 'pt', type: 2, isDeleted: false, createdAt: new Date(), updatedAt: new Date() },
+    { description: 'Lamina', abbreviation: 'lamina', type: 2, isDeleted: false, createdAt: new Date(), updatedAt: new Date() }
 ];
 
 module.exports = UnitsOfMeasurement;
